@@ -1,1624 +1,207 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>TONY'S PLAN — Your Body, Rebuilt</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0c0f'/%3E%3Ctext x='50%25' y='22' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='13' fill='%23e8ff47'%3ETP%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tony's Plan</title>
 <style>
-:root {
-  --bg: #0a0c0f;
-  --s1: #111418;
-  --s2: #181d24;
-  --border: #222c38;
-  --accent: #e8ff47;
-  --red: #ff3d3d;
-  --blue: #3d9eff;
-  --green: #3dff8a;
-  --muted: #4a6070;
-  --txt: #ddeeff;
-  --txt2: #8aaabb;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--txt);
-  font-family: 'Barlow', sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-/* ─── SPLASH ─── */
-#splash {
-  position: fixed; inset: 0; z-index: 9999;
-  background: var(--bg);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
-}
-.sp-logo {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: min(10vw, 60px); font-weight: 900; letter-spacing: 0.08em;
-  color: var(--accent); line-height: 1;
-  text-shadow: 0 0 80px rgba(232,255,71,.3);
-}
-.sp-tag { font-family: 'Barlow Condensed'; font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: 0.35em; }
-.sp-bar { width: 160px; height: 1px; background: var(--border); }
-.sp-fill { height: 1px; background: var(--accent); animation: ld 2.4s ease forwards; width: 0; }
-@keyframes ld { to { width: 160px; } }
-
-/* ─── HEADER ─── */
-header {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(10,12,15,.96); backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 16px;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 52px;
-}
-.logo { font-family: 'Barlow Condensed'; font-size: 24px; font-weight: 900; letter-spacing: 0.1em; color: var(--accent); }
-.hstats { display: flex; gap: 14px; }
-.hstat { text-align: center; }
-.hstat-v { font-family: 'Barlow Condensed'; font-size: 16px; font-weight: 700; color: var(--txt); line-height: 1; }
-.hstat-l { font-size: 9px; color: var(--muted); letter-spacing: 0.1em; margin-top: 1px; }
-
-/* ─── HERO ─── */
-.hero {
-  padding: 40px 16px 32px;
-  position: relative; overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute; top: -40px; right: -60px;
-  width: 280px; height: 280px;
-  background: radial-gradient(circle, rgba(232,255,71,.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-tag { font-family: 'Barlow Condensed'; font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 0.35em; margin-bottom: 10px; }
-.hero-h {
-  font-family: 'Barlow Condensed'; font-weight: 900;
-  font-size: clamp(52px, 13vw, 88px); line-height: 0.88; letter-spacing: 0.02em;
-}
-.hero-h .l1 { color: var(--txt); display: block; }
-.hero-h .l2 { color: var(--accent); display: block; }
-.hero-h .l3 { color: var(--txt); display: block; }
-.hero-h .l4 { color: var(--red); display: block; }
-.hero-sub { margin-top: 16px; font-size: 14px; color: var(--txt2); line-height: 1.7; max-width: 340px; }
-.hero-cta {
-  display: inline-flex; align-items: center; gap: 8px;
-  margin-top: 22px; padding: 13px 24px;
-  background: var(--accent); color: #000;
-  font-family: 'Barlow Condensed'; font-size: 15px; font-weight: 700; letter-spacing: 0.12em;
-  border: none; border-radius: 2px; cursor: pointer;
-  transition: transform .2s, box-shadow .2s;
-}
-.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,255,71,.3); }
-
-/* INBODY CARD */
-.inbody {
-  margin: 0 16px 32px;
-  background: var(--s1); border: 1px solid var(--border); border-radius: 8px;
-  overflow: hidden;
-}
-.inbody-top {
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.inbody-top-l { font-family: 'Barlow Condensed'; font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.25em; }
-.inbody-top-r { font-size: 10px; color: var(--muted); }
-.inbody-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-.inbody-cell {
-  padding: 14px 12px;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.inbody-cell:nth-child(3n) { border-right: none; }
-.inbody-cell:nth-last-child(-n+3) { border-bottom: none; }
-.inbody-cell-v { font-family: 'Barlow Condensed'; font-size: 26px; font-weight: 700; line-height: 1; }
-.inbody-cell-u { font-size: 10px; color: var(--muted); margin-left: 2px; }
-.inbody-cell-l { font-size: 10px; color: var(--muted); margin-top: 3px; letter-spacing: 0.05em; }
-.tag-hi { font-size: 9px; background: rgba(255,61,61,.2); color: #ff6666; padding: 1px 6px; border-radius: 2px; margin-left: 4px; letter-spacing: 0.08em; font-family: 'Barlow Condensed'; font-weight: 600; }
-.tag-ok { font-size: 9px; background: rgba(61,255,138,.2); color: #44ffaa; padding: 1px 6px; border-radius: 2px; margin-left: 4px; letter-spacing: 0.08em; font-family: 'Barlow Condensed'; font-weight: 600; }
-
-/* ─── SECTION ─── */
-.sec { padding: 36px 16px; }
-.sec-tag { font-family: 'Barlow Condensed'; font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 0.35em; margin-bottom: 6px; }
-.sec-h { font-family: 'Barlow Condensed'; font-size: clamp(34px, 9vw, 56px); font-weight: 900; letter-spacing: 0.03em; line-height: 0.92; margin-bottom: 24px; }
-
-/* ─── LEVEL CARDS ─── */
-.lvl-stack { display: flex; flex-direction: column; gap: 12px; }
-.lvl-card {
-  background: var(--s1); border: 1px solid var(--border); border-radius: 8px;
-  overflow: hidden; cursor: pointer; transition: border-color .25s, transform .25s;
-  -webkit-user-select: none; user-select: none;
-}
-.lvl-card:active { transform: scale(.98); }
-.lvl-card.selected { border-color: var(--accent); }
-.lvl-top-bar { height: 2px; }
-.lvl-inner { padding: 18px 16px; }
-.lvl-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.lvl-num {
-  font-family: 'Barlow Condensed'; font-size: 72px; font-weight: 900;
-  color: rgba(255,255,255,.04); line-height: 1; flex-shrink: 0;
-}
-.lvl-content { flex: 1; }
-.lvl-chip {
-  display: inline-block; font-family: 'Barlow Condensed'; font-size: 10px; font-weight: 700;
-  letter-spacing: 0.2em; padding: 2px 8px; border-radius: 2px; margin-bottom: 8px;
-}
-.chip-1 { background: rgba(61,158,255,.15); color: var(--blue); }
-.chip-2 { background: rgba(255,61,61,.15); color: var(--red); }
-.chip-3 { background: rgba(61,255,138,.15); color: var(--green); }
-.lvl-name { font-family: 'Barlow Condensed'; font-size: 22px; font-weight: 800; letter-spacing: 0.03em; margin-bottom: 6px; }
-.lvl-desc { font-size: 13px; color: var(--txt2); line-height: 1.6; }
-.lvl-meta { display: flex; gap: 16px; margin-top: 14px; flex-wrap: wrap; }
-.lvl-meta-i { }
-.lvl-meta-i-l { font-size: 9px; color: var(--muted); letter-spacing: 0.12em; font-family: 'Barlow Condensed'; font-weight: 600; }
-.lvl-meta-i-v { font-family: 'Barlow Condensed'; font-size: 15px; font-weight: 700; color: var(--txt); }
-.lvl-open-btn {
-  flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
-  border: 1px solid var(--border); background: transparent;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--txt2); font-size: 16px; cursor: pointer; transition: .2s;
-}
-
-/* ─── MODAL ─── */
-#overlay {
-  display: none; position: fixed; inset: 0; z-index: 500;
-  background: rgba(0,0,0,.9); overflow-y: auto;
-}
-#overlay.open { display: block; }
-.modal {
-  background: var(--s1); min-height: 100vh;
-  animation: slideup .3s cubic-bezier(.4,0,.2,1);
-}
-@keyframes slideup { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-.modal-head {
-  position: sticky; top: 0; z-index: 10;
-  background: var(--s1);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 16px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.modal-head-l { }
-.modal-head-tag { font-family: 'Barlow Condensed'; font-size: 10px; font-weight: 600; color: var(--muted); letter-spacing: 0.25em; }
-.modal-head-title { font-family: 'Barlow Condensed'; font-size: 22px; font-weight: 900; letter-spacing: 0.04em; line-height: 1; }
-.close-btn {
-  width: 36px; height: 36px; border-radius: 50%;
-  border: 1px solid var(--border); background: transparent;
-  color: var(--txt2); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
-/* Tab bar */
-.tab-bar {
-  display: flex; overflow-x: auto; border-bottom: 1px solid var(--border);
-  background: var(--s1);
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-.tab-bar::-webkit-scrollbar { display: none; }
-.tab-btn {
-  flex-shrink: 0; padding: 13px 16px;
-  font-family: 'Barlow Condensed'; font-size: 12px; font-weight: 700; letter-spacing: 0.18em;
-  color: var(--muted); border-bottom: 2px solid transparent;
-  cursor: pointer; transition: .2s; white-space: nowrap; background: transparent; border-top: none; border-left: none; border-right: none;
-}
-.tab-btn.on { color: var(--accent); border-color: var(--accent); }
-.modal-body { padding: 0; }
-
-/* ─── EXERCISE CARDS ─── */
-.ex-card {
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-}
-.ex-head {
-  padding: 16px;
-  display: flex; align-items: center; gap: 12px;
-}
-.ex-icon-box {
-  width: 48px; height: 48px; border-radius: 6px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Barlow Condensed'; font-weight: 900; font-size: 15px; letter-spacing: 0.05em;
-}
-.ex-info { flex: 1; min-width: 0; }
-.ex-name { font-family: 'Barlow Condensed'; font-size: 18px; font-weight: 800; letter-spacing: 0.03em; line-height: 1.1; }
-.ex-meta { font-size: 12px; color: var(--txt2); margin-top: 2px; }
-.ex-sets-badge {
-  font-family: 'Barlow Condensed'; font-size: 12px; font-weight: 700;
-  padding: 3px 10px; border-radius: 3px; letter-spacing: 0.1em; flex-shrink: 0;
-  background: rgba(255,255,255,.06); color: var(--txt2);
-}
-.ex-arrow { color: var(--muted); font-size: 14px; transition: transform .25s; flex-shrink: 0; }
-.ex-card.open .ex-arrow { transform: rotate(180deg); }
-.ex-body { display: none; border-top: 1px solid var(--border); }
-.ex-card.open .ex-body { display: block; }
-
-/* ─── ANATOMY VIEWER ─── */
-.anatomy-wrap {
-  background: #070a0d;
-  padding: 16px;
-  display: flex; flex-direction: column; gap: 0;
-}
-.anatomy-label {
-  font-family: 'Barlow Condensed'; font-size: 10px; font-weight: 600;
-  color: var(--muted); letter-spacing: 0.25em; margin-bottom: 10px;
-}
-.anatomy-fig {
-  display: flex; gap: 12px; align-items: flex-start;
-}
-.anat-svg-wrap {
-  flex: 0 0 auto;
-  width: 140px;
-}
-.anat-muscles {
-  flex: 1;
-  display: flex; flex-direction: column; gap: 6px;
-  padding-top: 4px;
-}
-.muscle-row {
-  display: flex; align-items: center; gap: 8px;
-}
-.muscle-dot {
-  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-}
-.muscle-name { font-size: 12px; color: var(--txt2); flex: 1; }
-.muscle-type {
-  font-family: 'Barlow Condensed'; font-size: 10px; font-weight: 700;
-  letter-spacing: 0.1em; padding: 1px 6px; border-radius: 2px;
-}
-.m-primary { background: rgba(255,61,61,.2); color: #ff6666; }
-.m-secondary { background: rgba(61,158,255,.15); color: #6aadff; }
-.m-stabilizer { background: rgba(255,255,255,.08); color: var(--muted); }
-
-/* MOTION CANVAS */
-.motion-wrap {
-  background: #050709; border-top: 1px solid var(--border);
-  padding: 12px 16px 8px;
-}
-.motion-label { font-family: 'Barlow Condensed'; font-size: 10px; font-weight: 600; color: var(--muted); letter-spacing: 0.25em; margin-bottom: 8px; }
-canvas.motion { display: block; width: 100%; height: 160px; }
-.motion-phase { text-align: center; font-family: 'Barlow Condensed'; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: var(--accent); margin-top: 6px; min-height: 16px; }
-
-/* YOUTUBE LINK */
-.yt-link {
-  display: flex; align-items: center; gap: 12px;
-  padding: 13px 16px;
-  background: #120808; border-top: 1px solid #2a1010; border-bottom: 1px solid var(--border);
-  text-decoration: none; transition: background .2s;
-  cursor: pointer;
-}
-.yt-link:hover { background: #1a0c0c; }
-.yt-pill {
-  width: 34px; height: 24px; background: #ff0000; border-radius: 5px;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.yt-pill svg { width: 14px; height: 14px; fill: white; }
-.yt-text { flex: 1; }
-.yt-title { font-family: 'Barlow Condensed'; font-size: 13px; font-weight: 700; color: #ff5555; letter-spacing: 0.08em; }
-.yt-sub { font-size: 11px; color: #6a3333; margin-top: 1px; }
-.yt-arrow { font-size: 12px; color: #6a3333; }
-
-/* TECHNIQUE STEPS */
-.steps-wrap { padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
-.step {
-  display: flex; gap: 10px; align-items: flex-start;
-  padding: 11px 12px;
-  background: rgba(255,255,255,.025); border-radius: 6px;
-  border-left: 2px solid var(--accent);
-}
-.step-n { font-family: 'Barlow Condensed'; font-size: 22px; font-weight: 900; color: var(--accent); line-height: 1; flex-shrink: 0; width: 18px; }
-.step-body { flex: 1; }
-.step-t { font-family: 'Barlow Condensed'; font-size: 14px; font-weight: 700; letter-spacing: 0.05em; color: var(--txt); margin-bottom: 2px; }
-.step-d { font-size: 12px; color: var(--txt2); line-height: 1.6; }
-
-/* ─── SCHEDULE TAB ─── */
-.sch-wrap { padding: 16px; }
-.sch-day-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-.sch-day {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 14px;
-  background: var(--s2); border-radius: 6px; border: 1px solid var(--border);
-}
-.sch-day.active { border-color: rgba(232,255,71,.3); background: rgba(232,255,71,.04); }
-.sch-day-name { font-family: 'Barlow Condensed'; font-size: 14px; font-weight: 700; letter-spacing: 0.1em; color: var(--muted); min-width: 36px; }
-.sch-day-focus { font-family: 'Barlow Condensed'; font-size: 15px; font-weight: 700; flex: 1; }
-.sch-day-type { font-size: 10px; color: var(--muted); background: rgba(255,255,255,.06); padding: 2px 8px; border-radius: 3px; font-family: 'Barlow Condensed'; letter-spacing: 0.1em; }
-.params-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.param-card {
-  background: var(--s2); border: 1px solid var(--border); border-radius: 6px; padding: 14px;
-}
-.param-v { font-family: 'Barlow Condensed'; font-size: 28px; font-weight: 900; color: var(--accent); line-height: 1; }
-.param-l { font-size: 10px; color: var(--muted); margin-top: 4px; letter-spacing: 0.1em; font-family: 'Barlow Condensed'; font-weight: 600; }
-
-/* TIPS TAB */
-.tips-wrap { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-.tip-card {
-  display: flex; gap: 12px; padding: 14px;
-  background: var(--s2); border: 1px solid var(--border); border-radius: 6px;
-  border-left: 2px solid var(--accent);
-}
-.tip-n { font-family: 'Barlow Condensed'; font-size: 28px; font-weight: 900; color: var(--accent); line-height: 1; flex-shrink: 0; }
-.tip-t { font-size: 13px; color: var(--txt2); line-height: 1.7; }
-.goal-box {
-  margin-top: 4px; padding: 16px;
-  background: rgba(232,255,71,.05); border: 1px solid rgba(232,255,71,.2); border-radius: 6px;
-}
-.goal-box-title { font-family: 'Barlow Condensed'; font-size: 16px; font-weight: 900; color: var(--accent); margin-bottom: 10px; letter-spacing: 0.05em; }
-.goal-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: 12px; }
-.goal-row:last-child { border-bottom: none; }
-.goal-label { color: var(--txt2); }
-.goal-val { font-family: 'Barlow Condensed'; font-size: 14px; font-weight: 700; color: var(--green); }
-
-/* NUTRITION */
-.nut-sec { padding: 36px 16px; background: var(--s1); }
-.nut-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.nut-card {
-  background: var(--s2); border: 1px solid var(--border); border-radius: 8px;
-  padding: 16px 14px; position: relative; overflow: hidden;
-}
-.nut-accent { position: absolute; top: 0; left: 0; right: 0; height: 2px; }
-.nut-v { font-family: 'Barlow Condensed'; font-size: 40px; font-weight: 900; line-height: 1; }
-.nut-u { font-size: 11px; color: var(--muted); margin-left: 2px; }
-.nut-l { font-family: 'Barlow Condensed'; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: var(--muted); margin-top: 4px; }
-.nut-d { font-size: 11px; color: var(--txt2); margin-top: 6px; line-height: 1.5; }
-
-/* TIMELINE */
-.tl-sec { padding: 36px 16px; }
-.tl { padding-left: 24px; position: relative; }
-.tl::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 0; width: 1px; background: var(--border); }
-.tl-item { position: relative; margin-bottom: 24px; }
-.tl-dot { position: absolute; left: -21px; top: 4px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--accent); background: var(--bg); }
-.tl-w { font-family: 'Barlow Condensed'; font-size: 10px; font-weight: 700; color: var(--accent); letter-spacing: 0.2em; margin-bottom: 3px; }
-.tl-t { font-family: 'Barlow Condensed'; font-size: 18px; font-weight: 800; letter-spacing: 0.04em; }
-.tl-d { font-size: 13px; color: var(--txt2); margin-top: 3px; line-height: 1.6; }
-
-footer { padding: 36px 16px; border-top: 1px solid var(--border); text-align: center; font-size: 11px; color: var(--muted); font-family: 'Barlow Condensed'; letter-spacing: 0.15em; line-height: 1.9; }
-footer span { color: var(--accent); }
-</style>
-</head>
-<body>
-
-<!-- SPLASH -->
-<div id="splash">
-  <div class="sp-logo">TONY'S PLAN</div>
-  <div class="sp-tag">LOADING YOUR PROGRAM</div>
-  <div class="sp-bar"><div class="sp-fill"></div></div>
+:root{--bg:#0b0d10;--card:#151a20;--line:#27313c;--fg:#e8eef5;--mut:#7f909f;--acc:#d4ff3a;--on:#0b0d10}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:520px;margin:0 auto;padding:16px 16px 40px}
+h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+h2{font-size:13px;color:var(--mut);letter-spacing:.12em;text-transform:uppercase;margin:24px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.st b{display:block;font-size:22px}.st span{font-size:12px;color:var(--mut)}
+.day{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.day b{font-size:18px}.day small{color:var(--mut);display:block}
+.pill{background:var(--acc);color:var(--on);border-radius:99px;padding:8px 16px;font-weight:700}
+button{font:inherit;cursor:pointer;border:0}
+.big{width:100%;background:var(--acc);color:var(--on);font-weight:800;font-size:19px;padding:18px;border-radius:14px;margin-top:14px}
+.sec{flex:1;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:12px;padding:12px 6px;font-weight:600;font-size:14px}
+.ghost{background:none;color:var(--mut);padding:6px 0}
+.bar{height:6px;background:var(--line);border-radius:9px;margin:10px 0 14px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
+.fig{width:100%;height:210px;color:var(--fg);display:block}
+.tag{display:inline-block;font-size:12px;color:var(--acc);border:1px solid var(--acc);border-radius:99px;padding:1px 10px;margin-top:12px}
+.name{font-size:26px;font-weight:800;margin:6px 0 2px}
+.sub{font-size:20px;color:var(--acc);font-weight:700}
+.tip{color:var(--mut);margin:6px 0 10px}
+a.yt{display:block;text-align:center;border:1px solid var(--line);border-radius:12px;padding:11px;color:var(--fg);text-decoration:none;font-weight:600}
+.row{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px;cursor:pointer}
+.row:last-child{border:0}.row span{color:var(--mut);text-align:right}
+.row.cur b{color:var(--acc)}.row.ok{opacity:.45}
+.ov{position:fixed;inset:0;background:var(--bg);display:none;overflow-y:auto;padding:16px;z-index:9}
+#rest{flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#rest .n{font-size:110px;font-weight:800;color:var(--acc);line-height:1}
+ul{padding-left:18px;color:var(--mut)}li{margin:5px 0}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:10px;text-align:center}
+.cal small{font-size:11px;color:var(--mut)}
+.cell{border-radius:10px;padding:10px 0;font-size:13px;font-weight:700;background:var(--bg);color:var(--mut);border:1px solid var(--line)}
+.cell.t{color:var(--fg);border-color:var(--acc)}.cell.d{background:var(--acc);color:var(--on)}
+</style></head><body>
+<div id="app"></div>
+<div id="rest" class="ov">
+  <div style="color:var(--mut)">REST</div>
+  <div class="n" id="rn">60</div>
+  <p id="rnext" style="margin:10px 0 20px"></p>
+  <button class="big" style="max-width:320px" onclick="endRest()">Skip rest</button>
 </div>
-
-<!-- HEADER -->
-<header>
-  <div class="logo">TONY'S PLAN</div>
-  <div class="hstats">
-    <div class="hstat"><div class="hstat-v">75<span style="font-size:10px;color:var(--muted)">kg</span></div><div class="hstat-l">WEIGHT</div></div>
-    <div class="hstat"><div class="hstat-v">22.4<span style="font-size:10px;color:var(--muted)">%</span></div><div class="hstat-l">FAT</div></div>
-    <div class="hstat"><div class="hstat-v" style="color:var(--accent)">12<span style="font-size:10px">W</span></div><div class="hstat-l">PROGRAM</div></div>
-  </div>
-</header>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-tag">YOUR TRANSFORMATION · MALE · 26 · 169 CM</div>
-  <h1 class="hero-h">
-    <span class="l1">BUILD</span>
-    <span class="l2">MUSCLE.</span>
-    <span class="l3">BURN</span>
-    <span class="l4">FAT.</span>
-  </h1>
-  <p class="hero-sub">Based on your InBody scan. 22.4% body fat → 14–17%. 58.2 kg lean mass → 62 kg. 12 weeks. Real method.</p>
-  <button class="hero-cta" onclick="document.getElementById('levels-sec').scrollIntoView({behavior:'smooth'})">
-    VIEW PROGRAM ↓
-  </button>
-</div>
-
-<!-- INBODY -->
-<div class="inbody">
-  <div class="inbody-top">
-    <div class="inbody-top-l">INBODY SCAN RESULTS</div>
-    <div class="inbody-top-r">WED 10/03/24</div>
-  </div>
-  <div class="inbody-grid">
-    <div class="inbody-cell">
-      <div class="inbody-cell-v" style="color:var(--txt)">75.0<span class="inbody-cell-u">kg</span></div>
-      <div class="inbody-cell-l">WEIGHT</div>
-    </div>
-    <div class="inbody-cell">
-      <div class="inbody-cell-v" style="color:var(--red)">22.4<span class="inbody-cell-u">%</span></div>
-      <div class="inbody-cell-l">BODY FAT <span class="tag-hi">HIGH</span></div>
-    </div>
-    <div class="inbody-cell">
-      <div class="inbody-cell-v" style="color:var(--blue)">16.8<span class="inbody-cell-u">kg</span></div>
-      <div class="inbody-cell-l">FAT MASS</div>
-    </div>
-    <div class="inbody-cell">
-      <div class="inbody-cell-v" style="color:var(--green)">58.2<span class="inbody-cell-u">kg</span></div>
-      <div class="inbody-cell-l">LEAN MASS <span class="tag-ok">OK</span></div>
-    </div>
-    <div class="inbody-cell">
-      <div class="inbody-cell-v" style="color:var(--txt)">42.6<span class="inbody-cell-u">kg</span></div>
-      <div class="inbody-cell-l">WATER</div>
-    </div>
-    <div class="inbody-cell">
-      <div class="inbody-cell-v" style="color:var(--accent)">26.3</div>
-      <div class="inbody-cell-l">BMI <span class="tag-hi">HIGH</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- LEVELS -->
-<div class="sec" id="levels-sec">
-  <div class="sec-tag">12-WEEK PROGRAM</div>
-  <div class="sec-h">YOUR<br>LEVELS</div>
-  <div class="lvl-stack">
-
-    <div class="lvl-card" onclick="openModal('L1')">
-      <div class="lvl-top-bar" style="background:var(--blue)"></div>
-      <div class="lvl-inner">
-        <div class="lvl-row">
-          <div class="lvl-content">
-            <div class="lvl-chip chip-1">WEEKS 1–4</div>
-            <div class="lvl-name">FOUNDATION IGNITE</div>
-            <div class="lvl-desc">Reactivate after the break. Build movement patterns, wake muscles, begin fat loss with compound lifts + HIIT cardio.</div>
-            <div class="lvl-meta">
-              <div class="lvl-meta-i"><div class="lvl-meta-i-l">DAYS/WEEK</div><div class="lvl-meta-i-v">4</div></div>
-              <div class="lvl-meta-i"><div class="lvl-meta-i-l">FOCUS</div><div class="lvl-meta-i-v">Form + Fat</div></div>
-              <div class="lvl-meta-i"><div class="lvl-meta-i-l">LEVEL</div><div class="lvl-meta-i-v">Moderate</div></div>
-            </div>
-          </div>
-          <div class="lvl-num">1</div>
-        </div>
-      </div>
-      <div style="height:2px;background:linear-gradient(90deg,var(--blue),transparent);width:33%"></div>
-    </div>
-
-    <div class="lvl-card" onclick="openModal('L2')">
-      <div class="lvl-top-bar" style="background:var(--red)"></div>
-      <div class="lvl-inner">
-        <div class="lvl-row">
-          <div class="lvl-content">
-            <div class="lvl-chip chip-2">WEEKS 5–8</div>
-            <div class="lvl-name">HYPERTROPHY DRIVE</div>
-            <div class="lvl-desc">Muscle-building mode. Push/Pull/Legs split with progressive overload. Volume up, rest down.</div>
-            <div class="lvl-meta">
-              <div class="lvl-meta-i"><div class="lvl-meta-i-l">DAYS/WEEK</div><div class="lvl-meta-i-v">5</div></div>
-              <div class="lvl-meta-i"><div class="lvl-meta-i-l">FOCUS</div><div class="lvl-meta-i-v">Muscle Size</div></div>
-              <div class="lvl-meta-i"><div class="lvl-meta-i-l">LEVEL</div><div class="lvl-meta-i-v">High</div></div>
-            </div>
-          </div>
-          <div class="lvl-num">2</div>
-        </div>
-      </div>
-      <div style="height:2px;background:linear-gradient(90deg,var(--red),transparent);width:66%"></div>
-    </div>
-
-    <div class="lvl-card" onclick="openModal('L3')">
-      <div class="lvl-top-bar" style="background:var(--green)"></div>
-      <div class="lvl-inner">
-        <div class="lvl-row">
-          <div class="lvl-content">
-            <div class="lvl-chip chip-3">WEEKS 9–12</div>
-            <div class="lvl-name">SHRED & DEFINE</div>
-            <div class="lvl-desc">Cut remaining fat, reveal the muscle underneath. Definition phase. This is the finish line.</div>
-            <div class="lvl-meta">
-              <div class="lvl-meta-i"><div class="lvl-meta-i-l">DAYS/WEEK</div><div class="lvl-meta-i-v">5–6</div></div>
-              <div class="lvl-meta-i"><div class="lvl-meta-i-l">FOCUS</div><div class="lvl-meta-i-v">Definition</div></div>
-              <div class="lvl-meta-i"><div class="lvl-meta-i-l">LEVEL</div><div class="lvl-meta-i-v">Peak</div></div>
-            </div>
-          </div>
-          <div class="lvl-num">3</div>
-        </div>
-      </div>
-      <div style="height:2px;background:linear-gradient(90deg,var(--green),transparent);width:100%"></div>
-    </div>
-
-  </div>
-</div>
-
-<!-- NUTRITION -->
-<div class="nut-sec">
-  <div class="sec-tag">DAILY TARGETS</div>
-  <div class="sec-h" style="margin-bottom:20px">NUTRITION</div>
-  <div class="nut-grid">
-    <div class="nut-card"><div class="nut-accent" style="background:var(--red)"></div><div class="nut-v" style="color:var(--red)">2,100<span class="nut-u">kcal</span></div><div class="nut-l">CALORIES</div><div class="nut-d">300 kcal deficit. Burns fat without losing muscle.</div></div>
-    <div class="nut-card"><div class="nut-accent" style="background:var(--blue)"></div><div class="nut-v" style="color:var(--blue)">175<span class="nut-u">g</span></div><div class="nut-l">PROTEIN</div><div class="nut-d">2.2g per kg lean mass. Non-negotiable daily.</div></div>
-    <div class="nut-card"><div class="nut-accent" style="background:#f5c842"></div><div class="nut-v" style="color:#f5c842">210<span class="nut-u">g</span></div><div class="nut-l">CARBS</div><div class="nut-d">Most around training sessions. Fuel performance.</div></div>
-    <div class="nut-card"><div class="nut-accent" style="background:var(--green)"></div><div class="nut-v" style="color:var(--green)">60<span class="nut-u">g</span></div><div class="nut-l">FAT</div><div class="nut-d">Olive oil, nuts, avocado. Essential for hormones.</div></div>
-  </div>
-</div>
-
-<!-- TIMELINE -->
-<div class="tl-sec">
-  <div class="sec-tag">ROADMAP</div>
-  <div class="sec-h" style="margin-bottom:24px">12-WEEK<br>PLAN</div>
-  <div class="tl">
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-w">WEEKS 1–2</div><div class="tl-t">REACTIVATION</div><div class="tl-d">Joints, tendons, CNS adapt. Focus 100% on form. Expect soreness.</div></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-w">WEEKS 3–4</div><div class="tl-t">MOMENTUM</div><div class="tl-d">Add weight progressively. The comeback effect is real and fast.</div></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-w">WEEKS 5–6</div><div class="tl-t">PUSH & PULL</div><div class="tl-d">Bench, deadlifts, rows, press. Visible muscle starts forming.</div></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-w">WEEKS 7–8</div><div class="tl-t">PEAK VOLUME</div><div class="tl-d">5 sessions/week. Drop sets appear. Hardest phase — stick with it.</div></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-w">WEEKS 9–10</div><div class="tl-t">REVEAL BEGINS</div><div class="tl-d">Definition emerging. You'll look noticeably different in the mirror.</div></div>
-    <div class="tl-item"><div class="tl-dot" style="border-color:var(--green)"></div><div class="tl-w">WEEKS 11–12</div><div class="tl-t">FINAL SHRED</div><div class="tl-d">14–17% body fat. Muscles full. Completely transformed.</div></div>
-  </div>
-</div>
-
-<footer>
-  TONY'S PLAN · <span>BUILT FOR YOUR BODY</span><br>
-  75 KG · 169 CM · 22.4% FAT · MALE · 26 YRS<br>
-  TARGET: 65–68 KG · 14–17% BODY FAT
-</footer>
-
-<!-- ═══════════════════════════════════════════ MODAL ═══ -->
-<div id="overlay">
-<div class="modal" id="mbox">
-  <div class="modal-head">
-    <div class="modal-head-l">
-      <div class="modal-head-tag" id="mhead-tag"></div>
-      <div class="modal-head-title" id="mhead-title"></div>
-    </div>
-    <button class="close-btn" onclick="closeModal()">✕</button>
-  </div>
-  <div class="tab-bar">
-    <button class="tab-btn on" onclick="switchTab('exercises',this)">EXERCISES + 3D</button>
-    <button class="tab-btn" onclick="switchTab('workout',this)">WORKOUT PLAN</button>
-    <button class="tab-btn" onclick="switchTab('schedule',this)">SCHEDULE</button>
-    <button class="tab-btn" onclick="switchTab('tips',this)">TIPS</button>
-  </div>
-  <div class="modal-body">
-    <div id="t-exercises"></div>
-    <div id="t-workout" style="display:none"></div>
-    <div id="t-schedule" style="display:none"></div>
-    <div id="t-tips" style="display:none"></div>
-  </div>
-</div>
-</div>
-
+<div id="pv" class="ov"><div style="max-width:520px;margin:0 auto" id="pvb"></div></div>
 <script>
-/* ═══════════════════════════════════════════════════════
-   EXERCISE DATABASE
-═══════════════════════════════════════════════════════ */
-const EXERCISES = [
-  {
-    id:'bench', name:'Bench Press', abbr:'BP',
-    sets:'4 × 8–12', rest:'90 sec', color:'#3d9eff',
-    yt:'https://www.youtube.com/results?search_query=bench+press+proper+form+technique+tutorial',
-    ytLabel:'Bench Press Proper Form Tutorial',
-    muscles:{
-      primary:['Pectoralis Major (Lower)','Pectoralis Major (Upper)','Anterior Deltoid'],
-      secondary:['Triceps Brachii','Coracobrachialis'],
-      stabilizer:['Rotator Cuff','Serratus Anterior']
-    },
-    summary:'The king of upper body pushing. Builds thick chest, front delts, and triceps. The horizontal push pattern.',
-    steps:[
-      {t:'Lie & Set Up',d:'Eyes under bar. Natural arch in lower back. Feet flat on floor. Squeeze shoulder blades together and down.'},
-      {t:'Grip',d:'Slightly wider than shoulder-width. Bar in the heel of your palm — not your fingers. Wrists straight.'},
-      {t:'Unrack',d:'Full breath, brace core. Unrack with locked elbows. Bar directly over lower chest.'},
-      {t:'Lower — 3 Seconds',d:'Elbows at 45–75°, never flared to 90°. Touch your lower chest. Control the descent.'},
-      {t:'Explode Up',d:'Drive the bar up and slightly back. Exhale. Lock out. Imagine pushing your body away from the bar.'}
-    ],
-    drawFn: drawBench
-  },
-  {
-    id:'squat', name:'Barbell Squat', abbr:'SQ',
-    sets:'4 × 6–10', rest:'2 min', color:'#ff5533',
-    yt:'https://www.youtube.com/results?search_query=barbell+back+squat+form+tutorial+beginner',
-    ytLabel:'Barbell Squat Full Technique Guide',
-    muscles:{
-      primary:['Quadriceps','Gluteus Maximus'],
-      secondary:['Hamstrings','Adductors','Hip Flexors'],
-      stabilizer:['Core','Erector Spinae','Calves']
-    },
-    summary:'The most complete lower body exercise. Builds quads, glutes, and entire posterior chain. The vertical push pattern.',
-    steps:[
-      {t:'Bar on Traps',d:'High bar position on upper traps — never on your neck. Squeeze traps to create a shelf.'},
-      {t:'Stance',d:'Shoulder-width, toes out 30–45°. Weight balanced across entire foot — not just heels.'},
-      {t:'Descend',d:'Push knees out tracking over toes. Hips back AND down simultaneously. Keep chest tall.'},
-      {t:'Hit Depth',d:'Thighs parallel or below. Do not let your lower back round at the bottom.'},
-      {t:'Drive Up',d:'Press the floor away. Drive hips forward. Exhale. Squeeze glutes at lockout.'}
-    ],
-    drawFn: drawSquat
-  },
-  {
-    id:'dead', name:'Deadlift', abbr:'DL',
-    sets:'3 × 5–8', rest:'2–3 min', color:'#3dff8a',
-    yt:'https://www.youtube.com/results?search_query=conventional+deadlift+form+tutorial+beginner',
-    ytLabel:'Deadlift Form — Beginner Breakdown',
-    muscles:{
-      primary:['Hamstrings','Gluteus Maximus','Erector Spinae'],
-      secondary:['Latissimus Dorsi','Trapezius','Quadriceps'],
-      stabilizer:['Core','Forearms','Rhomboids']
-    },
-    summary:'The ultimate full-body strength movement. Trains the entire posterior chain from glutes to upper back.',
-    steps:[
-      {t:'Bar Position',d:'Bar over mid-foot (~2.5 cm from shins). Hip-width stance, toes slightly out.'},
-      {t:'Hinge to Bar',d:'Push hips BACK to grip bar. Arms straight outside knees. Shoulder blades over bar.'},
-      {t:'Brace Hard',d:'Deep belly breath. Brace 360°. Lats down and back — "bend the bar around your legs."'},
-      {t:'Push Floor Away',d:'Don\'t think "pull" — push the floor away. Hips and shoulders rise at the same rate.'},
-      {t:'Lockout',d:'Drive hips forward at top. Stand tall, squeeze glutes. No hyperextension. Hold 1 second.'}
-    ],
-    drawFn: drawDead
-  },
-  {
-    id:'pullup', name:'Pull-Up', abbr:'PU',
-    sets:'3 × max reps', rest:'90 sec', color:'#f5c842',
-    yt:'https://www.youtube.com/results?search_query=pull+up+proper+form+full+tutorial+scapula',
-    ytLabel:'Pull-Up Perfect Form & Progressions',
-    muscles:{
-      primary:['Latissimus Dorsi','Teres Major'],
-      secondary:['Biceps Brachii','Rhomboids','Lower Trapezius'],
-      stabilizer:['Core','Forearms','Posterior Deltoid']
-    },
-    summary:'The best upper body pulling movement. Builds wide lats, thick back, and strong arms. The vertical pull pattern.',
-    steps:[
-      {t:'Dead Hang',d:'Overhand grip, slightly wider than shoulders. Arms 100% straight. Full hang.'},
-      {t:'Scapulae First',d:'BEFORE bending arms — pull your shoulder blades DOWN from your ears. This activates lats.'},
-      {t:'Pull — Elbows to Hips',d:'Drive elbows toward your hips (not backward). Chest leads up toward the bar.'},
-      {t:'Chin Over Bar',d:'Hold 1 second at the top. Lats fully contracted. Don\'t shrug your shoulders.'},
-      {t:'Lower — 3 Seconds',d:'Full controlled descent back to dead hang. Never let go of the bottom position.'}
-    ],
-    drawFn: drawPullup
-  },
-  {
-    id:'ohp', name:'Overhead Press', abbr:'OHP',
-    sets:'4 × 8–10', rest:'90 sec', color:'#ff5533',
-    yt:'https://www.youtube.com/results?search_query=overhead+press+shoulder+press+proper+form',
-    ytLabel:'Overhead Press — Shoulder Technique',
-    muscles:{
-      primary:['Anterior Deltoid','Medial Deltoid','Triceps Brachii'],
-      secondary:['Upper Pectoralis','Serratus Anterior','Trapezius'],
-      stabilizer:['Rotator Cuff','Core','Glutes']
-    },
-    summary:'The vertical pushing pattern for shoulder width and strength. Builds all three deltoid heads and upper chest.',
-    steps:[
-      {t:'Rack Position',d:'Bar on clavicle/upper chest. Grip just wider than shoulders. Elbows slightly forward.'},
-      {t:'Full Body Brace',d:'Squeeze glutes, brace core 360°, lat tension. This protects your lower back.'},
-      {t:'Press Vertically',d:'Push bar straight up. As it passes your face, push head slightly through the window.'},
-      {t:'Lockout Overhead',d:'Arms fully extended. Bar directly over heels. Shrug shoulders into ears for full lockout.'},
-      {t:'Controlled Descent',d:'2–3 seconds back to rack position. Reset your full brace before every rep.'}
-    ],
-    drawFn: drawOHP
-  },
-  {
-    id:'rdl', name:'Romanian Deadlift', abbr:'RDL',
-    sets:'3 × 10–12', rest:'75 sec', color:'#3dff8a',
-    yt:'https://www.youtube.com/results?search_query=romanian+deadlift+rdl+hamstring+tutorial+form',
-    ytLabel:'Romanian Deadlift — Hamstring Builder',
-    muscles:{
-      primary:['Hamstrings','Gluteus Maximus'],
-      secondary:['Erector Spinae','Adductors'],
-      stabilizer:['Core','Trapezius','Forearms']
-    },
-    summary:'The premier hamstring and glute isolation movement. Builds the posterior chain that makes you look athletic from behind.',
-    steps:[
-      {t:'Start Standing',d:'Hold bar at hip height. Soft bend in knees. Chest tall, scapulae pulled back and down.'},
-      {t:'Hip Hinge Back',d:'Push hips BACKWARD — not downward. Bar drags down your legs, close to shins.'},
-      {t:'Find the Stretch',d:'Lower until deep hamstring stretch, just below knee for most people. Back stays neutral.'},
-      {t:'Drive Hips Forward',d:'Contract hamstrings and glutes to drive hips forward. Hips lead the movement.'},
-      {t:'Squeeze at Top',d:'Full hip extension. Squeeze glutes hard. Do not hyperextend your lower back.'}
-    ],
-    drawFn: drawRDL
-  }
+// pose = [headX,headY, shoulderX,Y, hipX,Y, elbowX,Y, handX,Y, kneeX,Y, footX,Y]
+const S0=[50,14,50,26,50,54,52,40,52,55,50,72,51,90];
+const CURL=[50,14,50,26,50,54,52,40,62,28,50,72,51,90];
+const E={
+walk:{n:'Easy walk / bike',m:'Warm-up',t:'Light cardio to warm up the whole body. Easy pace, you can still talk.',q:'gym warm up treadmill walk',eq:'n',a:[50,14,50,26,50,54,58,40,64,50,60,70,62,88],b:[50,14,50,26,50,54,42,40,36,50,42,70,36,88]},
+circ:{n:'Arm circles',m:'Warm-up',t:'Big slow circles with straight arms. 10 forward, 10 backward.',q:'arm circles warm up shoulders',eq:'n',a:S0,b:[50,14,50,26,50,54,50,12,50,-2,50,72,51,90]},
+bsq:{n:'Bodyweight squat',m:'Warm-up',t:'Sit back like sitting on a chair, chest up, then stand.',q:'bodyweight squat proper form',eq:'n',a:[50,14,50,26,50,54,54,40,58,32,50,72,51,90],b:[56,26,54,38,38,64,58,48,60,38,62,68,52,90]},
+bench:{n:'Dumbbell Bench Press',m:'Chest',t:'Lie on the bench, dumbbells at chest level. Push straight up, lower slowly. Feet flat on the floor.',q:'dumbbell bench press proper form',x:'<rect x="6" y="76" width="62" height="5" rx="2" fill="var(--line)"/>',a:[16,68,28,72,56,72,36,80,32,62,74,62,72,88],b:[16,68,28,72,56,72,32,50,32,36,74,62,72,88]},
+pushdown:{n:'Triceps Pushdown',m:'Triceps',t:'Stand at the cable machine. Elbows stuck to your sides. Push the handle down until your arms are straight.',q:'triceps pushdown cable proper form',an:[60,-8],a:[50,14,50,26,50,54,52,40,60,38,50,72,51,90],b:[50,14,50,26,50,54,52,40,53,56,50,72,51,90]},
+ohe:{n:'Overhead Triceps Extension',m:'Triceps',t:'Hold one dumbbell with both hands behind your head. Push it straight up, elbows pointing forward.',q:'dumbbell overhead triceps extension form',a:[50,14,50,26,50,54,56,8,44,24,50,72,51,90],b:[50,14,50,26,50,54,56,8,56,-8,50,72,51,90]},
+crunch:{n:'Crunch',m:'Abs',t:'Lie on your back, knees bent. Curl your shoulders up by squeezing your abs. Do not pull your neck.',q:'crunch proper form abs',eq:'n',a:[16,83,27,85,58,85,22,76,18,81,72,68,84,86],b:[30,66,38,72,58,85,32,60,28,66,72,68,84,86]},
+plank:{n:'Plank',m:'Abs',t:'Elbows under shoulders, body in one straight line. Squeeze abs and glutes. Just hold and breathe.',q:'plank proper form',eq:'n',a:[14,60,24,64,54,72,24,84,38,86,72,80,90,88],b:[14,58,24,62,54,68,24,84,38,86,72,78,90,88]},
+legraise:{n:'Lying Leg Raise',m:'Lower abs',t:'Lie on your back, hands under hips. Lift straight legs up, lower slowly without touching the floor.',q:'lying leg raise proper form',eq:'n',a:[10,83,20,85,46,85,30,85,40,85,66,85,86,85],b:[10,83,20,85,46,85,30,85,40,85,46,63,46,43]},
+pulldown:{n:'Lat Pulldown',m:'Back',t:'Grab the bar wider than your shoulders. Pull it to your upper chest, elbows down. Do not lean back much.',q:'lat pulldown proper form',an:[58,-8],a:[50,32,50,44,50,70,56,28,58,10,68,68,68,90],b:[50,32,50,44,50,70,44,54,58,38,68,68,68,90]},
+row:{n:'Seated Cable Row',m:'Back',t:'Sit tall. Pull the handle to your belly and squeeze your shoulder blades together. Return slowly.',q:'seated cable row proper form',an:[98,56],a:[46,30,48,42,40,70,62,54,78,56,66,64,72,88],b:[42,30,44,42,40,70,34,56,58,56,66,64,72,88]},
+curl:{n:'Dumbbell Curl',m:'Biceps',t:'Elbows stay next to your body. Curl up, squeeze, lower slowly. No swinging.',q:'dumbbell bicep curl proper form',a:S0,b:CURL},
+hammer:{n:'Hammer Curl',m:'Biceps + forearm',t:'Same as a curl but hold the dumbbells like hammers (palms facing each other).',q:'hammer curl proper form',a:S0,b:CURL},
+squat:{n:'Goblet Squat',m:'Legs',t:'Hold one dumbbell at your chest. Sit down between your knees, chest up, then stand.',q:'goblet squat proper form',a:[50,14,50,26,50,54,54,40,58,32,50,72,51,90],b:[56,26,54,38,38,64,58,48,60,38,62,68,52,90]},
+rdl:{n:'Romanian Deadlift',m:'Hamstrings + glutes',t:'Dumbbells in front of thighs. Push hips back, back straight, slide weights down your legs, then stand up.',q:'dumbbell romanian deadlift proper form',a:[50,14,50,26,50,54,52,40,54,56,50,72,51,90],b:[76,40,64,42,36,54,64,58,64,74,42,72,46,90]},
+press:{n:'Dumbbell Shoulder Press',m:'Shoulders',t:'Dumbbells at shoulder height. Press straight up over your head, lower slowly.',q:'dumbbell shoulder press proper form',a:[50,14,50,26,50,54,60,36,57,22,50,72,51,90],b:[50,14,50,26,50,54,55,12,54,-4,50,72,51,90]},
+lateral:{n:'Lateral Raise',m:'Shoulders',t:'Light dumbbells. Lift your arms out to the SIDES to shoulder height, then lower slowly. Do not swing.',q:'dumbbell lateral raise proper form',a:S0,b:[50,14,50,26,50,54,64,32,78,30,50,72,51,90]}
+};
+const W=[['walk',1,'5 min'],['circ',1,'10 each way'],['bsq',1,'10 reps']];
+const DAYS=[
+{n:'Day 1',t:'Chest · Triceps · Abs',ex:[['bench',4,'10 reps'],['pushdown',3,'12 reps'],['ohe',3,'12 reps'],['crunch',3,'15 reps'],['plank',3,'40 sec']]},
+{n:'Day 2',t:'Back · Biceps · Abs',ex:[['pulldown',4,'10 reps'],['row',3,'10 reps'],['curl',3,'12 reps'],['hammer',3,'12 reps'],['legraise',3,'12 reps']]},
+{n:'Day 3',t:'Legs · Abs',ex:[['squat',4,'12 reps'],['rdl',3,'10 reps'],['legraise',3,'12 reps'],['crunch',3,'15 reps'],['plank',3,'40 sec']]},
+{n:'Day 4',t:'Shoulders · Arms · Abs',ex:[['press',4,'10 reps'],['lateral',3,'15 reps'],['curl',3,'12 reps'],['pushdown',3,'12 reps'],['crunch',3,'15 reps']]}
 ];
+const WEEKS=[
+'Learn the moves. Use LIGHT weights. Stop each set with 3 reps still left in you.',
+'Add a little weight (2–2.5 kg) on each exercise if week 1 felt easy.',
+'Keep the same weights. Try to hit the top reps on EVERY set.',
+'Push week. Use the heaviest weight you can lift with good form. Then start Block 2.'];
+const CAL=['Sat','Sun','Mon','Tue','Wed','Thu','Fri'],MAP={0:0,1:1,3:2,4:3};
+const $=id=>document.getElementById(id);
+const LS={get(){try{return JSON.parse(localStorage.getItem('tp')||'{}')}catch(e){return{}}},set(o){try{localStorage.setItem('tp',JSON.stringify(o))}catch(e){}}};
+let st=[],i=0,tm=0,after=null,dn='',wk=1,dk=0;const R={};
 
-/* ═══════════════════════════════════════════════════════
-   LEVEL DATA
-═══════════════════════════════════════════════════════ */
-const LEVELS = {
-  L1:{
-    tag:'WEEKS 1–4', title:'FOUNDATION IGNITE', color:'var(--blue)',
-    schedule:[
-      {d:'MON',f:'Full Body A',active:true,type:'STRENGTH'},
-      {d:'TUE',f:'HIIT Cardio',active:true,type:'CARDIO'},
-      {d:'WED',f:'Rest / Walk',active:false,type:'REST'},
-      {d:'THU',f:'Full Body B',active:true,type:'STRENGTH'},
-      {d:'FRI',f:'HIIT + Core',active:true,type:'CARDIO'},
-      {d:'SAT',f:'Active Rest',active:false,type:'REST'},
-      {d:'SUN',f:'Full Rest',active:false,type:'REST'}
-    ],
-    params:{sets:'3–4',reps:'10–15',rest:'75s',tempo:'3-1-X'},
-    tips:[
-      'Focus 100% on form — you\'re retraining your nervous system after the break.',
-      'Sleep 7–8 hours. 60–70% of fat loss happens during sleep, not training.',
-      'Drink 3–4 liters of water daily. Your InBody shows 42.6 kg water — maintain that.',
-      'Add 2.5–5 kg to lifts each week when the current weight feels manageable.',
-      'Eat protein with every single meal. Eggs, chicken, fish, Greek yogurt — hit 175g daily.'
-    ]
-  },
-  L2:{
-    tag:'WEEKS 5–8', title:'HYPERTROPHY DRIVE', color:'var(--red)',
-    schedule:[
-      {d:'MON',f:'Chest + Triceps',active:true,type:'PUSH'},
-      {d:'TUE',f:'Back + Biceps',active:true,type:'PULL'},
-      {d:'WED',f:'Legs',active:true,type:'LEGS'},
-      {d:'THU',f:'Shoulders',active:true,type:'PUSH'},
-      {d:'FRI',f:'Arms + Core',active:true,type:'ARMS'},
-      {d:'SAT',f:'Cardio 35 min',active:false,type:'CARDIO'},
-      {d:'SUN',f:'Full Rest',active:false,type:'REST'}
-    ],
-    params:{sets:'4–5',reps:'8–12',rest:'60–90s',tempo:'3-1-X'},
-    tips:[
-      'Progressive overload is the ONLY rule. Add weight or reps every single session — no exceptions.',
-      'Rest exactly 60–90 seconds between sets. More rest = less hypertrophy signal.',
-      'Eat slightly more on training days — +150 kcal from carbs around your session.',
-      'Track every lift in a notebook or app. Numbers force progress.',
-      'Always do compound movements first when you\'re freshest.'
-    ]
-  },
-  L3:{
-    tag:'WEEKS 9–12', title:'SHRED & DEFINE', color:'var(--green)',
-    schedule:[
-      {d:'MON',f:'Push Heavy',active:true,type:'PUSH'},
-      {d:'TUE',f:'Pull + HIIT',active:true,type:'PULL'},
-      {d:'WED',f:'Legs + Core',active:true,type:'LEGS'},
-      {d:'THU',f:'Push Volume',active:true,type:'PUSH'},
-      {d:'FRI',f:'Pull + HIIT',active:true,type:'PULL'},
-      {d:'SAT',f:'Full Circuit',active:true,type:'FULL'},
-      {d:'SUN',f:'Stretch / Rest',active:false,type:'REST'}
-    ],
-    params:{sets:'4',reps:'8–15',rest:'45–60s',tempo:'3-1-X'},
-    tips:[
-      'Drop to ~1,900 kcal but NEVER drop protein below 175g — muscle protection is everything.',
-      'Fasted cardio 20–30 min in the morning (before eating) for maximum fat burning.',
-      'Use supersets and drop sets to keep intensity high without adding gym time.',
-      'Weigh yourself weekly, same time, same conditions. Expect 0.5–1 kg loss/week.',
-      'You\'re cutting from 22.4% → 14–17% body fat. That\'s 5–8 kg of pure fat to lose.'
-    ]
-  }
-};
+function fig(e,t,id){
+  const p=e.a.map((v,k)=>v+(e.b[k]-v)*t),[hx,hy,sx,sy,px,py,ex,ey,wx,wy,kx,ky,fx,fy]=p;
+  const L=(a,b,c,d,w,col)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`;
+  let s=L(4,90,96,90,1,'var(--line)')+(e.x||'');
+  if(e.an)s+=L(e.an[0],e.an[1],wx,wy,1,'var(--mut)');
+  s+=L(sx,sy,px,py,5,'var(--fg)')+L(px,py,kx,ky,5,'var(--fg)')+L(kx,ky,fx,fy,5,'var(--fg)')+L(fx,fy,fx+6,fy,3,'var(--fg)');
+  s+=`<circle cx="${hx}" cy="${hy}" r="7" fill="var(--fg)"/>`+L(sx,sy,ex,ey,4,'var(--acc)')+L(ex,ey,wx,wy,4,'var(--acc)');
+  if(e.eq!=='n')s+=L(wx-5,wy,wx+5,wy,5,'var(--acc)');
+  return `<svg id="${id}" class="fig" viewBox="0 -10 100 105">${s}</svg>`;
+}
+function anim(e,id){
+  cancelAnimationFrame(R[id]);const t0=performance.now();
+  (function f(n){const t=(1-Math.cos((n-t0)/500))/2,el=$(id);if(el)el.outerHTML=fig(e,t,id);R[id]=requestAnimationFrame(f)})(t0);
+}
+function stopAnim(){Object.values(R).forEach(cancelAnimationFrame)}
+const yt=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
+const isDone=(w,d)=>!!LS.get()[w+'-'+d];
+function curWeek(){for(let w=1;w<=4;w++)for(let d=0;d<4;d++)if(!isDone(w,d))return w;return 4}
+function doneCount(){return Object.keys(LS.get()).length}
 
-/* ═══════════════════════════════════════════════════════
-   ANIMATION ENGINE
-═══════════════════════════════════════════════════════ */
-let curLvl = null, curTab = 'exercises', animMap = {};
-
-function startAnim(canvas, drawFn, color, phEl) {
-  const id = canvas.id;
-  if(animMap[id]) cancelAnimationFrame(animMap[id]);
-  let t0 = null;
-  const W = canvas.offsetWidth * 2; const H = 320;
-  canvas.width = W; canvas.height = H;
-  canvas.style.height = '160px';
-  function frame(ts) {
-    if(!t0) t0 = ts;
-    const t = ((ts - t0) / 3600) % 1;
-    drawFn(canvas, t, color);
-    if(phEl) phEl.textContent = getPhase(drawFn, t);
-    animMap[id] = requestAnimationFrame(frame);
-  }
-  animMap[id] = requestAnimationFrame(frame);
+function home(){
+  stopAnim();const w=curWeek();
+  $('app').innerHTML=`<h1>Tony's Plan</h1><p class="tip">Bigger muscles, balanced body, strong abs + arms.</p>
+  <div class="card day" onclick="plan()"><div><b>Month plan</b><small>${doneCount()} of 16 workouts done · Week ${w}</small></div><span class="pill">Open</span></div>
+  <h2>Quick start · Week ${w}</h2>
+  ${DAYS.map((d,k)=>`<div class="card day" onclick="start(${k},${w})"><div><b>${d.n} ${isDone(w,k)?'✓':''}</b><small>${d.t}</small></div><span class="pill">Start</span></div>`).join('')}
+  <h2>Your body scan</h2><div class="card"><div class="grid">
+  <div class="st"><b>75 kg</b><span>Weight</span></div><div class="st"><b>22.4%</b><span>Body fat</span></div><div class="st"><b>16.8 kg</b><span>Fat</span></div>
+  <div class="st"><b>58.2 kg</b><span>Muscle + bones</span></div><div class="st"><b>42.6 kg</b><span>Water</span></div><div class="st"><b>26.3</b><span>BMI</span></div></div>
+  <p class="tip" style="margin-top:12px">Healthy fat range for you: 14–20%. Abs show clearly around 14–16%, so we build muscle and slowly drop fat at the same time.</p></div>
+  <h2>4 simple rules</h2><div class="card"><ul>
+  <li>Protein every meal, about 135 g a day total.</li>
+  <li>Choose a weight where the last 2 reps are hard.</li>
+  <li>Sleep 7–8 hours. Muscles grow while you rest.</li>
+  <li>Missed a day? Do it the next day. Never double up.</li></ul></div>`;
 }
 
-function stopAllAnims() {
-  Object.keys(animMap).forEach(k => { if(animMap[k]) cancelAnimationFrame(animMap[k]); });
-  animMap = {};
+function plan(){
+  stopAnim();
+  $('app').innerHTML=`<button class="ghost" onclick="home()">← Back</button><h1>Month plan</h1>
+  <p class="tip">Train 4 days a week. Tap a training day to start it. Done days turn green.</p>
+  ${WEEKS.map((n,w)=>`<div class="card"><b style="font-size:18px">Week ${w+1}</b><p class="tip" style="margin:4px 0 0">${n}</p>
+  <div class="cal">${CAL.map(c=>`<small>${c}</small>`).join('')}${CAL.map((c,j)=>{const d=MAP[j];return d===undefined?`<div class="cell">–</div>`:`<div class="cell t ${isDone(w+1,d)?'d':''}" onclick="start(${d},${w+1})">D${d+1}</div>`}).join('')}</div></div>`).join('')}
+  <h2>How long? When to change?</h2>
+  <div class="card"><ul>
+  <li><b>Block 1 = weeks 1–4</b> (this month). Keep the same exercises so you can add weight each week.</li>
+  <li><b>Block 2 = weeks 5–8.</b> Swap variations: Bench → Incline Dumbbell Press, Lat Pulldown → Pull-ups (or assisted), Goblet Squat → Leg Press, Shoulder Press → Arnold Press, Curl → Incline Curl, Pushdown → Rope Pushdown.</li>
+  <li><b>Block 3 = weeks 9–12.</b> Go back to the Block 1 exercises, but heavier than before.</li>
+  <li><b>Abs:</b> keep crunch, plank and leg raise all 12 weeks. Add 2 reps or 5 seconds every week.</li>
+  <li><b>Weights rule:</b> if you hit the top reps on all sets in 2 workouts in a row, add weight next time.</li>
+  <li><b>After 12 weeks:</b> do a new body scan and we build the next plan from it.</li></ul></div>`;
 }
 
-function getPhase(fn, t) {
-  const c = (Math.cos(t * Math.PI * 2) + 1) / 2;
-  if(fn === drawBench) return c < 0.5 ? 'PRESSING UP — EXPLODE' : 'LOWERING — 3 SECONDS SLOW';
-  if(fn === drawSquat) return c < 0.35 ? 'BOTTOM — BELOW PARALLEL' : c < 0.7 ? 'DRIVING THROUGH' : 'STANDING — FULL LOCKOUT';
-  if(fn === drawDead) return c < 0.3 ? 'SETUP — BRACE & HINGE' : c < 0.65 ? 'PULLING — BAR AGAINST SHINS' : 'LOCKOUT — DRIVE HIPS';
-  if(fn === drawPullup) return c < 0.3 ? 'DEAD HANG — SCAPS DOWN' : c < 0.7 ? 'PULLING — ELBOWS TO HIPS' : 'TOP — CHIN OVER BAR';
-  if(fn === drawOHP) return c < 0.35 ? 'RACK — ELBOWS FORWARD' : c < 0.7 ? 'PRESSING VERTICALLY' : 'LOCKOUT — BAR OVER HEELS';
-  if(fn === drawRDL) return c < 0.3 ? 'BOTTOM — HAMSTRING STRETCH' : c < 0.65 ? 'DRIVING HIPS FORWARD' : 'TOP — SQUEEZE GLUTES';
-  return '';
+function start(k,w){
+  dk=k;wk=w||curWeek();dn=DAYS[k].n+' · '+DAYS[k].t;
+  st=[...W.map(x=>({k:x[0],n:x[1],r:x[2],c:0,w:1})),...DAYS[k].ex.map(x=>({k:x[0],n:x[1],r:x[2],c:0}))];
+  i=0;show();
 }
-
-/* ─── SHARED DRAWING HELPERS ─── */
-function bg(canvas, color) {
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-  ctx.clearRect(0, 0, W, H);
-  // subtle vignette glow
-  const g = ctx.createRadialGradient(W/2, H*.6, 0, W/2, H*.6, Math.max(W, H)*.7);
-  g.addColorStop(0, color + '10');
-  g.addColorStop(1, 'transparent');
-  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-  // floor
-  ctx.strokeStyle = '#1a2535'; ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(W*.05, H*.9); ctx.lineTo(W*.95, H*.9); ctx.stroke();
-  return ctx;
+function show(){
+  const x=st[i],e=E[x.k],tot=st.reduce((a,b)=>a+b.n,0),d2=st.reduce((a,b)=>a+b.c,0);
+  $('app').innerHTML=`<button class="ghost" onclick="home()">← Exit</button><div style="font-size:13px;color:var(--mut)">Week ${wk} · ${dn}</div>
+  <div class="bar"><i style="width:${d2/tot*100}%"></i></div>
+  <div class="card">${fig(e,0,'fig')}</div>
+  <span class="tag">${x.w?'WARM-UP':e.m}</span>
+  <div class="name">${e.n}</div>
+  <div class="sub">Set ${x.c+1} of ${x.n} · ${x.r}</div>
+  <p class="tip">${e.t}</p>
+  <a class="yt" href="${yt(e.q)}" target="_blank" rel="noopener">▶ Watch technique on YouTube</a>
+  <button class="big" onclick="done()">${x.c+1<x.n?'Set done ✓':(i<st.length-1?'Done ✓ Next exercise':'Finish workout ✓')}</button>
+  <div style="display:flex;gap:8px;margin-top:10px"><button class="sec" onclick="back()">◀ Back</button><button class="sec" onclick="skipSet()">Skip set</button><button class="sec" onclick="nextEx()">Next exercise ▶</button></div>
+  <h2>Left today · tap to preview</h2><div class="card">${st.map((y,j)=>`<div class="row ${j==i?'cur':''} ${y.c>=y.n?'ok':''}" onclick="pv(${j})"><b>${E[y.k].n}</b><span>${y.c>=y.n?'✓ done':(y.n-y.c)+(y.n-y.c>1?' sets':' set')+' left · '+y.r}</span></div>`).join('')}</div>`;
+  anim(e,'fig');window.scrollTo(0,0);
 }
-
-function S(canvas) { return canvas.height / 340; } // scale unit
-
-function head(ctx, x, y, r, color) {
-  // skull shape
-  ctx.fillStyle = color;
-  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
-  // face indication
-  ctx.fillStyle = 'rgba(0,0,0,.3)';
-  ctx.beginPath(); ctx.arc(x + r*.3, y + r*.1, r*.18, 0, Math.PI*2); ctx.fill();
+function done(){
+  const x=st[i];x.c++;
+  if(x.c<x.n){rest(x.w?0:60,'Next: Set '+(x.c+1)+' of '+x.n+' · '+E[x.k].n,show)}
+  else if(i<st.length-1){i++;rest(x.w?0:60,'Next: '+E[st[i].k].n,show)}
+  else fin();
 }
-
-function limb(ctx, x1, y1, x2, y2, w, color, muscled) {
-  const dx = x2-x1, dy = y2-y1, len = Math.sqrt(dx*dx+dy*dy);
-  const nx = -dy/len * w/2, ny = dx/len * w/2;
-  ctx.beginPath();
-  ctx.moveTo(x1+nx, y1+ny);
-  ctx.lineTo(x2+nx*0.7, y2+ny*0.7);
-  ctx.lineTo(x2-nx*0.7, y2-ny*0.7);
-  ctx.lineTo(x1-nx, y1-ny);
-  ctx.closePath();
-  if(muscled) {
-    const grad = ctx.createLinearGradient(x1, y1, x2, y2);
-    grad.addColorStop(0, color + 'cc');
-    grad.addColorStop(.5, color);
-    grad.addColorStop(1, color + 'cc');
-    ctx.fillStyle = grad;
-  } else {
-    ctx.fillStyle = color;
-  }
-  ctx.fill();
-  // muscle highlight
-  ctx.strokeStyle = color + '80';
-  ctx.lineWidth = 0.5;
-  ctx.stroke();
+function skipSet(){
+  const x=st[i];x.c++;
+  if(x.c>=x.n){if(i<st.length-1)i++;else{fin();return}}
+  show();
 }
-
-function joint(ctx, x, y, r, color) {
-  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
-  ctx.fillStyle = '#0a0c0f'; ctx.fill();
-  ctx.strokeStyle = color; ctx.lineWidth = r * .5; ctx.stroke();
+function back(){
+  const x=st[i];
+  if(x.c>0)x.c--;
+  else if(i>0){i--;const y=st[i];if(y.c>=y.n)y.c=y.n-1}
+  show();
 }
-
-function torso(ctx, x, y, w, h, color) {
-  ctx.fillStyle = color + '25';
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(x - w*.6, y);
-  ctx.lineTo(x - w*.5, y + h);
-  ctx.lineTo(x + w*.5, y + h);
-  ctx.lineTo(x + w*.6, y);
-  ctx.closePath();
-  ctx.fill(); ctx.stroke();
-  // pec lines
-  ctx.strokeStyle = color + '50'; ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(x - w*.4, y + h*.15); ctx.lineTo(x, y + h*.25); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(x + w*.4, y + h*.15); ctx.lineTo(x, y + h*.25); ctx.stroke();
-  // ab lines
-  for(let i = 0; i < 3; i++) {
-    const ay = y + h*.4 + i * h*.18;
-    ctx.beginPath(); ctx.moveTo(x-w*.3, ay); ctx.lineTo(x+w*.3, ay); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(x, ay); ctx.lineTo(x, ay + h*.16); ctx.stroke();
-  }
+function nextEx(){if(i<st.length-1){i++;show()}}
+function pv(j){
+  const y=st[j],e=E[y.k];
+  $('pvb').innerHTML=`<div class="card">${fig(e,0,'fig2')}</div>
+  <span class="tag">${y.w?'WARM-UP':e.m}</span><div class="name">${e.n}</div>
+  <div class="sub">${y.n} ${y.n>1?'sets':'set'} · ${y.r}</div><p class="tip">${e.t}</p>
+  <a class="yt" href="${yt(e.q)}" target="_blank" rel="noopener">▶ Watch technique on YouTube</a>
+  <button class="big" onclick="goTo(${j})">Go to this exercise</button>
+  <button class="big" style="background:var(--card);color:var(--fg);border:1px solid var(--line);margin-top:10px" onclick="closePv()">Close</button>`;
+  $('pv').style.display='block';anim(e,'fig2');
 }
-
-function bar3d(ctx, x, y, W, w, color, plateColor) {
-  const S = w;
-  // Bar body
-  ctx.fillStyle = '#c0d0e0';
-  ctx.fillRect(x - W/2, y - S*.4, W, S*.8);
-  // Plate left
-  ctx.fillStyle = plateColor || '#e05533';
-  ctx.beginPath();
-  ctx.ellipse(x - W/2 + S, y, S*.5, S*1.6, 0, 0, Math.PI*2); ctx.fill();
-  ctx.fillRect(x - W/2, y - S*1.6, S*1.5, S*3.2);
-  ctx.fillStyle = '#f5c84240';
-  ctx.fillRect(x - W/2 + S*1.5, y - S*1.1, S*.8, S*2.2);
-  // Plate right
-  ctx.fillStyle = plateColor || '#e05533';
-  ctx.fillRect(x + W/2 - S*2.3, y - S*1.6, S*1.5, S*3.2);
-  ctx.beginPath();
-  ctx.ellipse(x + W/2 - S*.5, y, S*.5, S*1.6, 0, 0, Math.PI*2); ctx.fill();
-  ctx.fillStyle = '#f5c84240';
-  ctx.fillRect(x + W/2 - S*2.3, y - S*1.1, S*.8, S*2.2);
-  // Bar sheen
-  ctx.fillStyle = 'rgba(255,255,255,.15)';
-  ctx.fillRect(x - W/2 + S*2.5, y - S*.25, W - S*5, S*.4);
+function closePv(){cancelAnimationFrame(R.fig2);$('pv').style.display='none'}
+function goTo(j){closePv();i=j;show()}
+function rest(sec,msg,cb){
+  if(!sec){cb();return}
+  cancelAnimationFrame(R.fig);after=cb;let n=sec;
+  $('rn').textContent=n;$('rnext').textContent=msg;$('rest').style.display='flex';
+  clearInterval(tm);tm=setInterval(()=>{n--;$('rn').textContent=n;if(n<=0)endRest()},1000);
 }
-
-/* ─── BENCH PRESS ─── */
-function drawBench(canvas, t, color) {
-  const ctx = bg(canvas, color);
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, s = S(canvas);
-  const c = (Math.cos(t*Math.PI*2)+1)/2;
-
-  // Bench
-  ctx.fillStyle = '#1a2535'; ctx.strokeStyle = '#243a55'; ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.roundRect(cx-100*s, H*.72, 200*s, 18*s, 4*s); ctx.fill(); ctx.stroke();
-  // Legs
-  ctx.strokeStyle = '#1a2535'; ctx.lineWidth = 5*s;
-  ctx.beginPath(); ctx.moveTo(cx-75*s, H*.72+18*s); ctx.lineTo(cx-75*s, H*.9); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(cx+75*s, H*.72+18*s); ctx.lineTo(cx+75*s, H*.9); ctx.stroke();
-  // J-hooks
-  ctx.strokeStyle = '#243a55'; ctx.lineWidth = 4*s;
-  ctx.beginPath(); ctx.moveTo(cx-88*s, H*.72); ctx.lineTo(cx-88*s, H*.45); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(cx+88*s, H*.72); ctx.lineTo(cx+88*s, H*.45); ctx.stroke();
-
-  // Body lying
-  const bodyY = H*.65;
-  const headX = cx, headY = bodyY - 28*s;
-  head(ctx, headX, headY, 13*s, color);
-  torso(ctx, cx, bodyY - 24*s, 42*s, 56*s, color);
-
-  // Legs bent
-  limb(ctx, cx-12*s, bodyY+32*s, cx-22*s, bodyY+52*s, 12*s, color, true);
-  limb(ctx, cx+12*s, bodyY+32*s, cx+22*s, bodyY+52*s, 12*s, color, true);
-  joint(ctx, cx-22*s, bodyY+52*s, 5*s, color);
-  joint(ctx, cx+22*s, bodyY+52*s, 5*s, color);
-  limb(ctx, cx-22*s, bodyY+52*s, cx-28*s, H*.88, 9*s, color, false);
-  limb(ctx, cx+22*s, bodyY+52*s, cx+28*s, H*.88, 9*s, color, false);
-
-  // Bar
-  const barHi = bodyY - 68*s;
-  const barLo = bodyY - 12*s;
-  const barY = barLo + (barHi - barLo) * (1 - c);
-
-  // Highlighted pecs when pressing
-  if(c < .4) {
-    ctx.fillStyle = '#ff333340';
-    ctx.beginPath(); ctx.ellipse(cx, bodyY-8*s, 28*s, 18*s, 0, 0, Math.PI*2); ctx.fill();
-  }
-
-  // Arms
-  const elbY = barY + c * 20*s;
-  const elbX = 50*s;
-  limb(ctx, cx-18*s, bodyY+2*s, cx-elbX, elbY, 9*s, color, true);
-  limb(ctx, cx-elbX, elbY, cx-78*s, barY, 8*s, color, false);
-  limb(ctx, cx+18*s, bodyY+2*s, cx+elbX, elbY, 9*s, color, true);
-  limb(ctx, cx+elbX, elbY, cx+78*s, barY, 8*s, color, false);
-  joint(ctx, cx-elbX, elbY, 5*s, color);
-  joint(ctx, cx+elbX, elbY, 5*s, color);
-
-  bar3d(ctx, cx, barY, 175*s, 5*s, color, '#3d9eff');
+function endRest(){
+  clearInterval(tm);$('rest').style.display='none';
+  if(after){const f=after;after=null;f()}
 }
-
-/* ─── SQUAT ─── */
-function drawSquat(canvas, t, color) {
-  const ctx = bg(canvas, color);
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, s = S(canvas);
-  const c = (Math.cos(t*Math.PI*2)+1)/2;
-
-  const floorY = H*.9;
-  const squat = c; // 0=bottom, 1=standing
-
-  // Standing vs squatted positions
-  const hipY = (H*.42) + (1-squat)*H*.22;
-  const torsoH = 80*s;
-  const lean = (1-squat) * 12*s;
-  const headY = hipY - torsoH - 14*s;
-
-  // Bar
-  bar3d(ctx, cx+lean, headY + 18*s, 190*s, 4.5*s, color, '#ff5533');
-
-  // Torso
-  ctx.save(); ctx.translate(cx+lean, hipY);
-  ctx.fillStyle = color + '20'; ctx.strokeStyle = color; ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(-16*s, -torsoH); ctx.lineTo(-12*s, 0); ctx.lineTo(12*s, 0); ctx.lineTo(16*s, -torsoH); ctx.closePath();
-  ctx.fill(); ctx.stroke();
-  // Abs
-  ctx.strokeStyle = color+'30'; ctx.lineWidth = .8;
-  for(let i=0;i<3;i++){const ay=-torsoH*.4+i*torsoH*.18;ctx.beginPath();ctx.moveTo(-10*s,ay);ctx.lineTo(10*s,ay);ctx.stroke();}
-  ctx.restore();
-
-  head(ctx, cx+lean, headY, 13*s, color);
-
-  // Legs
-  const kx = (28 + (1-squat)*18)*s;
-  const kneeY = hipY + (24 + (1-squat)*40)*s;
-  const footX = 52*s;
-
-  limb(ctx, cx+lean-10*s, hipY, cx-kx, kneeY, 15*s, color, true);
-  limb(ctx, cx+lean+10*s, hipY, cx+kx, kneeY, 15*s, color, true);
-  joint(ctx, cx-kx, kneeY, 6*s, color);
-  joint(ctx, cx+kx, kneeY, 6*s, color);
-  limb(ctx, cx-kx, kneeY, cx-footX, floorY, 12*s, color, false);
-  limb(ctx, cx+kx, kneeY, cx+footX, floorY, 12*s, color, false);
-
-  // Feet
-  ctx.fillStyle = color+'80'; ctx.beginPath(); ctx.ellipse(cx-footX, floorY, 12*s, 4*s, 0,0,Math.PI*2); ctx.fill();
-  ctx.fillStyle = color+'80'; ctx.beginPath(); ctx.ellipse(cx+footX, floorY, 12*s, 4*s, 0,0,Math.PI*2); ctx.fill();
-
-  // Quad highlight at bottom
-  if(squat < .35) {
-    ctx.fillStyle = '#ff553330';
-    ctx.beginPath(); ctx.ellipse(cx-kx, kneeY-20*s, 20*s, 35*s, 0.3, 0, Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.ellipse(cx+kx, kneeY-20*s, 20*s, 35*s, -0.3, 0, Math.PI*2); ctx.fill();
-  }
-  // Glute highlight standing
-  if(squat > .75) {
-    ctx.fillStyle = '#ff553320'; ctx.beginPath(); ctx.ellipse(cx, hipY+4*s, 22*s, 14*s, 0,0,Math.PI*2); ctx.fill();
-  }
+function fin(){
+  stopAnim();const o=LS.get();o[wk+'-'+dk]=1;LS.set(o);
+  $('app').innerHTML=`<div style="text-align:center;padding:80px 0"><div style="font-size:64px">💪</div><h1 style="margin:10px 0">Workout done!</h1><p class="tip">Week ${wk} · ${dn}<br>${doneCount()} of 16 workouts done. Eat protein and sleep well.</p><button class="big" onclick="home()">Back to home</button></div>`;
 }
-
-/* ─── DEADLIFT ─── */
-function drawDead(canvas, t, color) {
-  const ctx = bg(canvas, color);
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, s = S(canvas);
-  const c = (Math.cos(t*Math.PI*2)+1)/2;
-
-  const floorY = H*.9;
-  const lift = c;
-
-  // Bar Y rises with lift
-  const barY = floorY - 20*s - lift * 100*s;
-  bar3d(ctx, cx, barY, 195*s, 6*s, color, '#3dff8a');
-
-  // Hips
-  const hipY = (H*.78) - lift*100*s;
-  const angle = (1-lift) * .8; // forward lean
-  const torsoLen = 90*s;
-
-  // Torso
-  ctx.save(); ctx.translate(cx, hipY);
-  ctx.rotate(-angle);
-  ctx.fillStyle = color+'18'; ctx.strokeStyle = color; ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.moveTo(-16*s,-torsoLen); ctx.lineTo(-12*s,0); ctx.lineTo(12*s,0); ctx.lineTo(16*s,-torsoLen); ctx.closePath();
-  ctx.fill(); ctx.stroke();
-  // Abs
-  ctx.strokeStyle = color+'30'; ctx.lineWidth=.8;
-  for(let i=0;i<3;i++){const ay=-torsoLen*.45+i*torsoLen*.2;ctx.beginPath();ctx.moveTo(-8*s,ay);ctx.lineTo(8*s,ay);ctx.stroke();}
-  ctx.restore();
-
-  // Head
-  const hx = cx - Math.sin(angle)*torsoLen;
-  const hy = hipY - Math.cos(angle)*torsoLen;
-  head(ctx, hx, hy - 13*s, 12*s, color);
-
-  // Hamstring highlight at bottom
-  if(lift < .35) {
-    ctx.fillStyle = '#3dff8a20';
-    ctx.beginPath(); ctx.ellipse(cx-20*s, hipY+22*s, 16*s, 30*s, 0.1, 0, Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.ellipse(cx+20*s, hipY+22*s, 16*s, 30*s, -0.1, 0, Math.PI*2); ctx.fill();
-  }
-
-  // Arms
-  const sx = cx - Math.sin(angle)*torsoLen*.8;
-  const sy = hipY - Math.cos(angle)*torsoLen*.8;
-  limb(ctx, sx-10*s, sy, cx-22*s, barY, 7*s, color, false);
-  limb(ctx, sx+10*s, sy, cx+22*s, barY, 7*s, color, false);
-  joint(ctx, cx-22*s, barY, 4*s, color);
-  joint(ctx, cx+22*s, barY, 4*s, color);
-
-  // Legs
-  const kneeY = hipY + 28*s;
-  limb(ctx, cx-10*s, hipY, cx-22*s, kneeY, 14*s, color, true);
-  limb(ctx, cx+10*s, hipY, cx+22*s, kneeY, 14*s, color, true);
-  joint(ctx, cx-22*s, kneeY, 5*s, color);
-  joint(ctx, cx+22*s, kneeY, 5*s, color);
-  limb(ctx, cx-22*s, kneeY, cx-28*s, floorY, 11*s, color, false);
-  limb(ctx, cx+22*s, kneeY, cx+28*s, floorY, 11*s, color, false);
-
-  // Glute highlight at lockout
-  if(lift > .75) {
-    ctx.fillStyle = '#3dff8a25'; ctx.beginPath(); ctx.ellipse(cx, hipY+5*s, 22*s, 14*s, 0,0,Math.PI*2); ctx.fill();
-  }
-}
-
-/* ─── PULL-UP ─── */
-function drawPullup(canvas, t, color) {
-  const ctx = bg(canvas, color);
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, s = S(canvas);
-  const c = (Math.cos(t*Math.PI*2)+1)/2;
-
-  const pull = c; // 0=hang,1=top
-
-  // Pull-up bar rig
-  ctx.strokeStyle = '#243a55'; ctx.lineWidth = 4*s;
-  ctx.beginPath(); ctx.moveTo(cx-90*s, H*.05); ctx.lineTo(cx+90*s, H*.05); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(cx-90*s, H*.05); ctx.lineTo(cx-90*s, H*.13); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(cx+90*s, H*.05); ctx.lineTo(cx+90*s, H*.13); ctx.stroke();
-  // Bar
-  ctx.strokeStyle = '#c0d0e0'; ctx.lineWidth = 8*s;
-  ctx.beginPath(); ctx.moveTo(cx-85*s, H*.13); ctx.lineTo(cx+85*s, H*.13); ctx.stroke();
-
-  // Body hangs
-  const bodyTop = H*.18 + (1-pull)*H*.35;
-  const bodyH = 65*s;
-
-  // Lat highlight
-  if(pull > .6) {
-    ctx.fillStyle = '#f5c84220'; ctx.beginPath();
-    ctx.ellipse(cx, bodyTop+20*s, 50*s, 22*s, 0, 0, Math.PI*2); ctx.fill();
-  }
-
-  // Arms
-  const elbH = (1-pull)*.9;
-  limb(ctx, cx-14*s, bodyTop+8*s, cx-40*s, bodyTop-20*s+elbH*40*s, 9*s, color, true);
-  limb(ctx, cx-40*s, bodyTop-20*s+elbH*40*s, cx-40*s, H*.13, 7*s, color, false);
-  limb(ctx, cx+14*s, bodyTop+8*s, cx+40*s, bodyTop-20*s+elbH*40*s, 9*s, color, true);
-  limb(ctx, cx+40*s, bodyTop-20*s+elbH*40*s, cx+40*s, H*.13, 7*s, color, false);
-  joint(ctx, cx-40*s, bodyTop-20*s+elbH*40*s, 5*s, color);
-  joint(ctx, cx+40*s, bodyTop-20*s+elbH*40*s, 5*s, color);
-
-  // Hands on bar
-  ctx.fillStyle = color+'cc'; ctx.beginPath(); ctx.arc(cx-40*s, H*.13, 6*s, 0, Math.PI*2); ctx.fill();
-  ctx.fillStyle = color+'cc'; ctx.beginPath(); ctx.arc(cx+40*s, H*.13, 6*s, 0, Math.PI*2); ctx.fill();
-
-  // Torso
-  torso(ctx, cx, bodyTop, 42*s, bodyH, color);
-  head(ctx, cx, bodyTop-13*s, 13*s, color);
-
-  // Legs hanging
-  const swing = Math.sin(t*Math.PI*2)*4*s;
-  limb(ctx, cx-8*s, bodyTop+bodyH, cx-12*s+swing, bodyTop+bodyH+45*s, 10*s, color, true);
-  limb(ctx, cx+8*s, bodyTop+bodyH, cx+12*s+swing, bodyTop+bodyH+45*s, 10*s, color, true);
-  joint(ctx, cx-12*s+swing, bodyTop+bodyH+45*s, 5*s, color);
-  joint(ctx, cx+12*s+swing, bodyTop+bodyH+45*s, 5*s, color);
-  limb(ctx, cx-12*s+swing, bodyTop+bodyH+45*s, cx-8*s+swing, bodyTop+bodyH+90*s, 8*s, color, false);
-  limb(ctx, cx+12*s+swing, bodyTop+bodyH+45*s, cx+8*s+swing, bodyTop+bodyH+90*s, 8*s, color, false);
-}
-
-/* ─── OVERHEAD PRESS ─── */
-function drawOHP(canvas, t, color) {
-  const ctx = bg(canvas, color);
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, s = S(canvas);
-  const c = (Math.cos(t*Math.PI*2)+1)/2;
-
-  const floorY = H*.9;
-  const press = c; // 0=rack,1=overhead
-
-  // Standing body
-  const headY = H*.14;
-  head(ctx, cx, headY, 13*s, color);
-  torso(ctx, cx, headY+16*s, 42*s, 72*s, color);
-
-  // Legs
-  limb(ctx, cx-10*s, headY+88*s, cx-14*s, headY+130*s, 14*s, color, true);
-  limb(ctx, cx+10*s, headY+88*s, cx+14*s, headY+130*s, 14*s, color, true);
-  joint(ctx, cx-14*s, headY+130*s, 5*s, color);
-  joint(ctx, cx+14*s, headY+130*s, 5*s, color);
-  limb(ctx, cx-14*s, headY+130*s, cx-18*s, floorY, 11*s, color, false);
-  limb(ctx, cx+14*s, headY+130*s, cx+18*s, floorY, 11*s, color, false);
-  ctx.fillStyle=color+'70';ctx.beginPath();ctx.ellipse(cx-18*s,floorY,12*s,4*s,0,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.ellipse(cx+18*s,floorY,12*s,4*s,0,0,Math.PI*2);ctx.fill();
-
-  // Bar position
-  const rackY = headY + 26*s;
-  const overY = headY - 55*s;
-  const barY = rackY + (overY-rackY)*press;
-
-  // Arms
-  const shoulderY = headY + 26*s;
-  if(press < .5) {
-    const fp = press * 2;
-    limb(ctx, cx-14*s, shoulderY, cx-45*s, shoulderY+15*s*(1-fp), 8*s, color, true);
-    limb(ctx, cx-45*s, shoulderY+15*s*(1-fp), cx-40*s, barY, 7*s, color, false);
-    limb(ctx, cx+14*s, shoulderY, cx+45*s, shoulderY+15*s*(1-fp), 8*s, color, true);
-    limb(ctx, cx+45*s, shoulderY+15*s*(1-fp), cx+40*s, barY, 7*s, color, false);
-    joint(ctx, cx-45*s, shoulderY+15*s*(1-fp), 4*s, color);
-    joint(ctx, cx+45*s, shoulderY+15*s*(1-fp), 4*s, color);
-  } else {
-    const fp = (press-.5)*2;
-    limb(ctx, cx-14*s, shoulderY, cx-32*s, shoulderY-(40*s*fp), 8*s, color, true);
-    limb(ctx, cx-32*s, shoulderY-(40*s*fp), cx-36*s, barY, 7*s, color, false);
-    limb(ctx, cx+14*s, shoulderY, cx+32*s, shoulderY-(40*s*fp), 8*s, color, true);
-    limb(ctx, cx+32*s, shoulderY-(40*s*fp), cx+36*s, barY, 7*s, color, false);
-    joint(ctx, cx-32*s, shoulderY-(40*s*fp), 4*s, color);
-    joint(ctx, cx+32*s, shoulderY-(40*s*fp), 4*s, color);
-  }
-
-  bar3d(ctx, cx, barY, 165*s, 4.5*s, color, '#ff5533');
-
-  // Delt highlight
-  if(press > .5) {
-    ctx.fillStyle = '#ff553325';
-    ctx.beginPath(); ctx.ellipse(cx-18*s, shoulderY, 16*s, 12*s, -.3, 0, Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.ellipse(cx+18*s, shoulderY, 16*s, 12*s, .3, 0, Math.PI*2); ctx.fill();
-  }
-}
-
-/* ─── RDL ─── */
-function drawRDL(canvas, t, color) {
-  const ctx = bg(canvas, color);
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, s = S(canvas);
-  const c = (Math.cos(t*Math.PI*2)+1)/2;
-
-  const floorY = H*.9;
-  const hinge = c; // 0=hinged,1=standing
-  const angle = (1-hinge)*.85;
-  const torsoLen = 90*s;
-  const hipY = H*.62;
-
-  // Torso
-  ctx.save(); ctx.translate(cx, hipY); ctx.rotate(-angle);
-  ctx.fillStyle = color+'18'; ctx.strokeStyle = color; ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.moveTo(-16*s,-torsoLen); ctx.lineTo(-12*s,0); ctx.lineTo(12*s,0); ctx.lineTo(16*s,-torsoLen); ctx.closePath();
-  ctx.fill(); ctx.stroke();
-  ctx.restore();
-
-  // Head
-  const hx = cx - Math.sin(angle)*torsoLen;
-  const hy = hipY - Math.cos(angle)*torsoLen;
-  head(ctx, hx, hy-13*s, 12*s, color);
-
-  // Bar
-  const barY = hipY + 10*s + (1-hinge)*60*s;
-  bar3d(ctx, cx, barY, 185*s, 5*s, color, '#3dff8a');
-
-  // Arms
-  const sx = cx - Math.sin(angle)*torsoLen*.85;
-  const sy = hipY - Math.cos(angle)*torsoLen*.85;
-  limb(ctx, sx-10*s, sy, cx-20*s, barY, 7*s, color, false);
-  limb(ctx, sx+10*s, sy, cx+20*s, barY, 7*s, color, false);
-  joint(ctx, cx-20*s, barY, 4*s, color);
-  joint(ctx, cx+20*s, barY, 4*s, color);
-
-  // Legs
-  limb(ctx, cx-10*s, hipY, cx-18*s, hipY+32*s, 14*s, color, true);
-  limb(ctx, cx+10*s, hipY, cx+18*s, hipY+32*s, 14*s, color, true);
-  joint(ctx, cx-18*s, hipY+32*s, 5*s, color);
-  joint(ctx, cx+18*s, hipY+32*s, 5*s, color);
-  limb(ctx, cx-18*s, hipY+32*s, cx-22*s, floorY, 12*s, color, false);
-  limb(ctx, cx+18*s, hipY+32*s, cx+22*s, floorY, 12*s, color, false);
-  ctx.fillStyle=color+'70';ctx.beginPath();ctx.ellipse(cx-22*s,floorY,12*s,4*s,0,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.ellipse(cx+22*s,floorY,12*s,4*s,0,0,Math.PI*2);ctx.fill();
-
-  // Hamstring highlight at bottom
-  if(hinge < .35) {
-    ctx.fillStyle = '#3dff8a25';
-    ctx.beginPath(); ctx.ellipse(cx-15*s, hipY+20*s, 14*s, 28*s, .15, 0, Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.ellipse(cx+15*s, hipY+20*s, 14*s, 28*s, -.15, 0, Math.PI*2); ctx.fill();
-  }
-}
-
-/* ═══════════════════════════════════════════════════════
-   ANATOMY SVG (inline per exercise)
-═══════════════════════════════════════════════════════ */
-const ANATOMY_SVGS = {
-  bench: `<svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg" style="width:100%">
-    <!-- lying figure -->
-    <ellipse cx="60" cy="22" rx="10" ry="10" fill="#3d9eff" opacity=".9"/>
-    <!-- torso -->
-    <rect x="45" y="32" width="30" height="55" rx="4" fill="#1a3a55" stroke="#3d9eff" stroke-width="1"/>
-    <!-- chest highlight PRIMARY -->
-    <ellipse cx="53" cy="48" rx="9" ry="8" fill="#ff3d3d" opacity=".8"/>
-    <ellipse cx="67" cy="48" rx="9" ry="8" fill="#ff3d3d" opacity=".8"/>
-    <!-- delts SECONDARY -->
-    <ellipse cx="42" cy="38" rx="7" ry="6" fill="#3d9eff" opacity=".6"/>
-    <ellipse cx="78" cy="38" rx="7" ry="6" fill="#3d9eff" opacity=".6"/>
-    <!-- triceps SECONDARY -->
-    <ellipse cx="38" cy="55" rx="6" ry="10" fill="#3d9eff" opacity=".5"/>
-    <ellipse cx="82" cy="55" rx="6" ry="10" fill="#3d9eff" opacity=".5"/>
-    <!-- arms -->
-    <line x1="42" y1="38" x2="25" y2="60" stroke="#3d9eff" stroke-width="5" stroke-linecap="round"/>
-    <line x1="78" y1="38" x2="95" y2="60" stroke="#3d9eff" stroke-width="5" stroke-linecap="round"/>
-    <!-- legs lying -->
-    <line x1="55" y1="87" x2="48" y2="130" stroke="#1a3a55" stroke-width="8" stroke-linecap="round"/>
-    <line x1="65" y1="87" x2="72" y2="130" stroke="#1a3a55" stroke-width="8" stroke-linecap="round"/>
-    <!-- labels -->
-    <circle cx="60" cy="48" r="3" fill="#ff3d3d"/>
-    <line x1="60" y1="48" x2="100" y2="30" stroke="#ff3d3d" stroke-width=".5" opacity=".5"/>
-    <text x="102" y="33" fill="#ff3d3d" font-size="7" font-family="sans-serif">PRIMARY</text>
-    <line x1="42" y1="38" x2="8" y2="24" stroke="#3d9eff" stroke-width=".5" opacity=".5"/>
-    <text x="2" y="22" fill="#3d9eff" font-size="6" font-family="sans-serif" text-anchor="middle">2ND</text>
-  </svg>`,
-  squat: `<svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg" style="width:100%">
-    <!-- squat position -->
-    <ellipse cx="60" cy="22" rx="10" ry="10" fill="#ff5533" opacity=".9"/>
-    <!-- torso leaned -->
-    <rect x="46" y="32" width="28" height="45" rx="4" fill="#2a1505" stroke="#ff5533" stroke-width="1" transform="rotate(-8,60,55)"/>
-    <!-- quads PRIMARY -->
-    <ellipse cx="42" cy="115" rx="11" ry="22" fill="#ff3d3d" opacity=".85" transform="rotate(12,42,115)"/>
-    <ellipse cx="78" cy="115" rx="11" ry="22" fill="#ff3d3d" opacity=".85" transform="rotate(-12,78,115)"/>
-    <!-- glutes PRIMARY -->
-    <ellipse cx="48" cy="88" rx="12" ry="10" fill="#ff3d3d" opacity=".8"/>
-    <ellipse cx="72" cy="88" rx="12" ry="10" fill="#ff3d3d" opacity=".8"/>
-    <!-- hamstrings SECONDARY -->
-    <ellipse cx="44" cy="118" rx="8" ry="18" fill="#ff5533" opacity=".4" transform="rotate(-10,44,118)"/>
-    <ellipse cx="76" cy="118" rx="8" ry="18" fill="#ff5533" opacity=".4" transform="rotate(10,76,118)"/>
-    <!-- calves stabilizer -->
-    <ellipse cx="42" cy="158" rx="7" ry="14" fill="#ffffff" opacity=".08"/>
-    <ellipse cx="78" cy="158" rx="7" ry="14" fill="#ffffff" opacity=".08"/>
-    <!-- knees bent -->
-    <circle cx="40" cy="138" r="5" fill="#0a0c0f" stroke="#ff5533" stroke-width="1.5"/>
-    <circle cx="80" cy="138" r="5" fill="#0a0c0f" stroke="#ff5533" stroke-width="1.5"/>
-  </svg>`,
-  dead: `<svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg" style="width:100%">
-    <!-- hinged position -->
-    <ellipse cx="40" cy="52" rx="10" ry="10" fill="#3dff8a" opacity=".9"/>
-    <!-- torso hinged -->
-    <rect x="36" y="62" width="26" height="60" rx="4" fill="#053a15" stroke="#3dff8a" stroke-width="1" transform="rotate(60,60,100)"/>
-    <!-- hamstrings PRIMARY -->
-    <ellipse cx="62" cy="118" rx="11" ry="25" fill="#ff3d3d" opacity=".85"/>
-    <ellipse cx="80" cy="118" rx="11" ry="25" fill="#ff3d3d" opacity=".85"/>
-    <!-- glutes PRIMARY -->
-    <ellipse cx="68" cy="95" rx="14" ry="12" fill="#ff3d3d" opacity=".8"/>
-    <!-- erectors PRIMARY -->
-    <ellipse cx="55" cy="80" rx="6" ry="20" fill="#ff3d3d" opacity=".6" transform="rotate(55,55,80)"/>
-    <!-- lats SECONDARY -->
-    <ellipse cx="48" cy="82" rx="10" ry="8" fill="#3dff8a" opacity=".4"/>
-    <!-- arms straight -->
-    <line x1="55" y1="88" x2="62" y2="145" stroke="#3dff8a" stroke-width="5" stroke-linecap="round"/>
-    <!-- bar -->
-    <rect x="50" y="148" width="55" height="8" rx="2" fill="#c0d0e0"/>
-    <rect x="45" y="143" width="8" height="18" rx="2" fill="#3dff8a" opacity=".8"/>
-    <rect x="100" y="143" width="8" height="18" rx="2" fill="#3dff8a" opacity=".8"/>
-    <!-- knees -->
-    <circle cx="64" cy="145" r="5" fill="#0a0c0f" stroke="#3dff8a" stroke-width="1.5"/>
-  </svg>`,
-  pullup: `<svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg" style="width:100%">
-    <!-- bar -->
-    <rect x="10" y="18" width="100" height="7" rx="3" fill="#c0d0e0"/>
-    <!-- head -->
-    <ellipse cx="60" cy="35" rx="10" ry="10" fill="#f5c842" opacity=".9"/>
-    <!-- torso -->
-    <rect x="47" y="45" width="26" height="55" rx="4" fill="#2a2005" stroke="#f5c842" stroke-width="1"/>
-    <!-- lats PRIMARY - spread wide -->
-    <ellipse cx="38" cy="65" rx="14" ry="18" fill="#ff3d3d" opacity=".8"/>
-    <ellipse cx="82" cy="65" rx="14" ry="18" fill="#ff3d3d" opacity=".8"/>
-    <!-- biceps SECONDARY -->
-    <ellipse cx="32" cy="45" rx="7" ry="12" fill="#f5c842" opacity=".6"/>
-    <ellipse cx="88" cy="45" rx="7" ry="12" fill="#f5c842" opacity=".6"/>
-    <!-- arms bent -->
-    <line x1="48" y1="50" x2="28" y2="25" stroke="#f5c842" stroke-width="7" stroke-linecap="round"/>
-    <line x1="72" y1="50" x2="92" y2="25" stroke="#f5c842" stroke-width="7" stroke-linecap="round"/>
-    <!-- hands -->
-    <circle cx="28" cy="22" r="5" fill="#f5c842" opacity=".8"/>
-    <circle cx="92" cy="22" r="5" fill="#f5c842" opacity=".8"/>
-    <!-- legs hanging -->
-    <line x1="55" y1="100" x2="50" y2="148" stroke="#2a2005" stroke-width="9" stroke-linecap="round"/>
-    <line x1="65" y1="100" x2="70" y2="148" stroke="#2a2005" stroke-width="9" stroke-linecap="round"/>
-    <line x1="50" y1="148" x2="48" y2="175" stroke="#2a2005" stroke-width="7" stroke-linecap="round"/>
-    <line x1="70" y1="148" x2="72" y2="175" stroke="#2a2005" stroke-width="7" stroke-linecap="round"/>
-  </svg>`,
-  ohp: `<svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg" style="width:100%">
-    <!-- overhead bar -->
-    <rect x="8" y="20" width="104" height="6" rx="2" fill="#c0d0e0"/>
-    <rect x="4" y="14" width="10" height="18" rx="2" fill="#ff5533" opacity=".8"/>
-    <rect x="106" y="14" width="10" height="18" rx="2" fill="#ff5533" opacity=".8"/>
-    <!-- arms up -->
-    <line x1="42" y1="68" x2="22" y2="23" stroke="#ff5533" stroke-width="7" stroke-linecap="round"/>
-    <line x1="78" y1="68" x2="98" y2="23" stroke="#ff5533" stroke-width="7" stroke-linecap="round"/>
-    <!-- head -->
-    <ellipse cx="60" cy="72" rx="10" ry="10" fill="#ff5533" opacity=".9"/>
-    <!-- torso -->
-    <rect x="46" y="82" width="28" height="58" rx="4" fill="#2a1005" stroke="#ff5533" stroke-width="1"/>
-    <!-- anterior delts PRIMARY -->
-    <ellipse cx="40" cy="82" rx="10" ry="9" fill="#ff3d3d" opacity=".85"/>
-    <ellipse cx="80" cy="82" rx="10" ry="9" fill="#ff3d3d" opacity=".85"/>
-    <!-- triceps PRIMARY -->
-    <ellipse cx="34" cy="55" rx="7" ry="14" fill="#ff3d3d" opacity=".75"/>
-    <ellipse cx="86" cy="55" rx="7" ry="14" fill="#ff3d3d" opacity=".75"/>
-    <!-- upper pec SECONDARY -->
-    <ellipse cx="50" cy="95" rx="10" ry="6" fill="#ff5533" opacity=".4"/>
-    <ellipse cx="70" cy="95" rx="10" ry="6" fill="#ff5533" opacity=".4"/>
-    <!-- legs -->
-    <line x1="55" y1="140" x2="50" y2="178" stroke="#2a1005" stroke-width="10" stroke-linecap="round"/>
-    <line x1="65" y1="140" x2="70" y2="178" stroke="#2a1005" stroke-width="10" stroke-linecap="round"/>
-  </svg>`,
-  rdl: `<svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg" style="width:100%">
-    <!-- hinged -->
-    <ellipse cx="38" cy="48" rx="10" ry="10" fill="#3dff8a" opacity=".9"/>
-    <!-- torso hinged forward -->
-    <rect x="34" y="58" width="26" height="55" rx="4" fill="#053a15" stroke="#3dff8a" stroke-width="1" transform="rotate(55,60,90)"/>
-    <!-- hamstrings PRIMARY - highlighted red -->
-    <ellipse cx="70" cy="128" rx="12" ry="28" fill="#ff3d3d" opacity=".9"/>
-    <ellipse cx="88" cy="128" rx="12" ry="28" fill="#ff3d3d" opacity=".75"/>
-    <!-- glutes PRIMARY -->
-    <ellipse cx="76" cy="100" rx="16" ry="13" fill="#ff3d3d" opacity=".8"/>
-    <!-- erectors SECONDARY -->
-    <ellipse cx="51" cy="80" rx="5" ry="22" fill="#3dff8a" opacity=".4" transform="rotate(52,51,80)"/>
-    <!-- arms holding bar -->
-    <line x1="56" y1="88" x2="66" y2="140" stroke="#3dff8a" stroke-width="6" stroke-linecap="round"/>
-    <!-- bar -->
-    <rect x="50" y="148" width="58" height="7" rx="2" fill="#c0d0e0"/>
-    <rect x="44" y="142" width="9" height="19" rx="2" fill="#3dff8a" opacity=".8"/>
-    <rect x="105" y="142" width="9" height="19" rx="2" fill="#3dff8a" opacity=".8"/>
-    <!-- knee slight bend -->
-    <circle cx="72" cy="154" r="5" fill="#0a0c0f" stroke="#3dff8a" stroke-width="1.5"/>
-    <!-- calves -->
-    <line x1="72" y1="154" x2="70" y2="185" stroke="#1a3525" stroke-width="9" stroke-linecap="round"/>
-    <line x1="88" y1="154" x2="90" y2="185" stroke="#1a3525" stroke-width="9" stroke-linecap="round"/>
-  </svg>`
-};
-
-/* ═══════════════════════════════════════════════════════
-   RENDER FUNCTIONS
-═══════════════════════════════════════════════════════ */
-function openModal(k) {
-  curLvl = k;
-  const d = LEVELS[k];
-  document.getElementById('mhead-tag').textContent = d.tag;
-  document.getElementById('mhead-title').textContent = d.title;
-  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('on', i===0));
-  ['exercises','workout','schedule','tips'].forEach(t => {
-    document.getElementById('t-'+t).style.display = t==='exercises'?'block':'none';
-  });
-  renderExercises();
-  document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('overlay').scrollTop = 0;
-}
-
-function closeModal() {
-  document.getElementById('overlay').classList.remove('open');
-  document.body.style.overflow = '';
-  stopAllAnims();
-}
-
-function switchTab(name, el) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
-  el.classList.add('on');
-  ['exercises','workout','schedule','tips'].forEach(t => {
-    document.getElementById('t-'+t).style.display = t===name?'block':'none';
-  });
-  stopAllAnims();
-  if(name==='exercises') renderExercises();
-  else if(name==='workout') renderWorkout();
-  else if(name==='schedule') renderSchedule();
-  else if(name==='tips') renderTips();
-}
-
-function getLvlColor() { return LEVELS[curLvl].color; }
-
-function renderExercises() {
-  const el = document.getElementById('t-exercises');
-  el.innerHTML = EXERCISES.map((ex, i) => `
-    <div class="ex-card" id="ec${i}" onclick="toggleEx(${i})">
-      <div class="ex-head">
-        <div class="ex-icon-box" style="background:${ex.color}18;color:${ex.color}">${ex.abbr}</div>
-        <div class="ex-info">
-          <div class="ex-name" style="color:${ex.color}">${ex.name}</div>
-          <div class="ex-meta">${ex.sets} reps &nbsp;·&nbsp; Rest: ${ex.rest}</div>
-        </div>
-        <div class="ex-sets-badge">${ex.sets.split('×')[0].trim()}</div>
-        <div class="ex-arrow">▾</div>
-      </div>
-      <div class="ex-body">
-
-        <div class="anatomy-wrap">
-          <div class="anatomy-label">MUSCLES TARGETED</div>
-          <div class="anatomy-fig">
-            <div class="anat-svg-wrap">${ANATOMY_SVGS[ex.id]}</div>
-            <div class="anat-muscles">
-              <div style="font-size:10px;color:var(--muted);letter-spacing:.12em;font-family:'Barlow Condensed';font-weight:700;margin-bottom:4px">PRIMARY</div>
-              ${ex.muscles.primary.map(m=>`<div class="muscle-row"><div class="muscle-dot" style="background:#ff3d3d"></div><div class="muscle-name">${m}</div><div class="muscle-type m-primary">PRIMARY</div></div>`).join('')}
-              <div style="font-size:10px;color:var(--muted);letter-spacing:.12em;font-family:'Barlow Condensed';font-weight:700;margin:8px 0 4px">SECONDARY</div>
-              ${ex.muscles.secondary.map(m=>`<div class="muscle-row"><div class="muscle-dot" style="background:#3d9eff"></div><div class="muscle-name">${m}</div><div class="muscle-type m-secondary">2ND</div></div>`).join('')}
-              <div style="font-size:10px;color:var(--muted);letter-spacing:.12em;font-family:'Barlow Condensed';font-weight:700;margin:8px 0 4px">STABILIZER</div>
-              ${ex.muscles.stabilizer.map(m=>`<div class="muscle-row"><div class="muscle-dot" style="background:var(--muted)"></div><div class="muscle-name">${m}</div><div class="muscle-type m-stabilizer">STAB</div></div>`).join('')}
-            </div>
-          </div>
-          <div style="margin-top:12px;padding:10px 12px;background:rgba(255,255,255,.03);border-radius:6px;font-size:12px;color:var(--txt2);line-height:1.6;border-left:2px solid ${ex.color}40">
-            ${ex.summary}
-          </div>
-        </div>
-
-        <div class="motion-wrap">
-          <div class="motion-label">LIVE MOTION PREVIEW</div>
-          <canvas class="motion" id="cv${i}"></canvas>
-          <div class="motion-phase" id="ph${i}">---</div>
-        </div>
-
-        <a class="yt-link" href="${ex.yt}" target="_blank" onclick="event.stopPropagation()">
-          <div class="yt-pill"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></div>
-          <div class="yt-text">
-            <div class="yt-title">WATCH ON YOUTUBE →</div>
-            <div class="yt-sub">${ex.ytLabel}</div>
-          </div>
-          <div class="yt-arrow">↗</div>
-        </a>
-
-        <div class="steps-wrap">
-          ${ex.steps.map((s,si)=>`
-            <div class="step">
-              <div class="step-n">${si+1}</div>
-              <div class="step-body">
-                <div class="step-t">${s.t}</div>
-                <div class="step-d">${s.d}</div>
-              </div>
-            </div>
-          `).join('')}
-        </div>
-
-      </div>
-    </div>
-  `).join('');
-}
-
-function toggleEx(i) {
-  const card = document.getElementById('ec'+i);
-  const wasOpen = card.classList.contains('open');
-  document.querySelectorAll('.ex-card').forEach((c,ci) => {
-    c.classList.remove('open');
-    if(animMap['cv'+ci]) { cancelAnimationFrame(animMap['cv'+ci]); animMap['cv'+ci]=null; }
-  });
-  if(!wasOpen) {
-    card.classList.add('open');
-    setTimeout(() => {
-      const cv = document.getElementById('cv'+i);
-      const ph = document.getElementById('ph'+i);
-      if(cv) startAnim(cv, EXERCISES[i].drawFn, EXERCISES[i].color, ph);
-    }, 80);
-  }
-}
-
-function renderWorkout() {
-  const d = LEVELS[curLvl];
-  const el = document.getElementById('t-workout');
-  el.innerHTML = `
-    <div style="padding:16px">
-      <p style="color:var(--txt2);font-size:13px;line-height:1.8;margin-bottom:18px">Based on your InBody: 58.2 kg lean to protect, 16.8 kg fat to burn. Every session is purpose-built for recomposition.</p>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        ${d.schedule.map(s => `
-          <div style="background:var(--s2);border:1px solid ${s.active?'rgba(232,255,71,.25)':'var(--border)'};border-radius:6px;padding:12px 14px;display:flex;align-items:center;gap:12px">
-            <div style="font-family:'Barlow Condensed';font-size:14px;font-weight:700;color:var(--muted);min-width:32px;letter-spacing:.1em">${s.d}</div>
-            <div style="font-family:'Barlow Condensed';font-size:16px;font-weight:700;flex:1;color:${s.active?'var(--txt)':'var(--muted)'}">${s.f}</div>
-            <div style="font-size:9px;padding:2px 8px;border-radius:3px;font-family:'Barlow Condensed';font-weight:700;letter-spacing:.1em;background:rgba(255,255,255,.05);color:var(--muted)">${s.type}</div>
-          </div>
-        `).join('')}
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px">
-        <div style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:14px"><div style="font-family:'Barlow Condensed';font-size:32px;font-weight:900;color:var(--accent)">${d.params.sets}</div><div style="font-size:9px;color:var(--muted);font-family:'Barlow Condensed';font-weight:700;letter-spacing:.15em;margin-top:2px">SETS</div></div>
-        <div style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:14px"><div style="font-family:'Barlow Condensed';font-size:32px;font-weight:900;color:var(--accent)">${d.params.reps}</div><div style="font-size:9px;color:var(--muted);font-family:'Barlow Condensed';font-weight:700;letter-spacing:.15em;margin-top:2px">REPS</div></div>
-        <div style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:14px"><div style="font-family:'Barlow Condensed';font-size:32px;font-weight:900;color:var(--accent)">${d.params.rest}</div><div style="font-size:9px;color:var(--muted);font-family:'Barlow Condensed';font-weight:700;letter-spacing:.15em;margin-top:2px">REST</div></div>
-        <div style="background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:14px"><div style="font-family:'Barlow Condensed';font-size:32px;font-weight:900;color:var(--accent)">${d.params.tempo}</div><div style="font-size:9px;color:var(--muted);font-family:'Barlow Condensed';font-weight:700;letter-spacing:.15em;margin-top:2px">TEMPO</div></div>
-      </div>
-      <div style="margin-top:10px;font-size:11px;color:var(--muted)">Tempo ${d.params.tempo}: slow lower → pause → explosive lift</div>
-    </div>
-  `;
-}
-
-function renderSchedule() {
-  const d = LEVELS[curLvl];
-  const el = document.getElementById('t-schedule');
-  el.innerHTML = `
-    <div class="sch-wrap">
-      <div class="sch-day-list">
-        ${d.schedule.map(s=>`
-          <div class="sch-day ${s.active?'active':''}">
-            <div class="sch-day-name">${s.d}</div>
-            <div class="sch-day-focus" style="color:${s.active?'var(--txt)':'var(--muted)'}">${s.f}</div>
-            <div class="sch-day-type">${s.type}</div>
-          </div>
-        `).join('')}
-      </div>
-      <div class="params-grid">
-        ${[['Sessions/week',curLvl==='L1'?'4':curLvl==='L2'?'5':'5–6'],['Fat target',curLvl==='L1'?'~20%':curLvl==='L2'?'~18%':'14–17%'],['Fat to lose',curLvl==='L1'?'1–2 kg':curLvl==='L2'?'2–3 kg':'3–4 kg'],['Weight goal',curLvl==='L1'?'~73 kg':curLvl==='L2'?'~70 kg':'65–68 kg']].map(([l,v])=>`
-          <div class="param-card">
-            <div class="param-v">${v}</div>
-            <div class="param-l">${l}</div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `;
-}
-
-function renderTips() {
-  const d = LEVELS[curLvl];
-  const el = document.getElementById('t-tips');
-  el.innerHTML = `
-    <div class="tips-wrap">
-      ${d.tips.map((t,i)=>`
-        <div class="tip-card">
-          <div class="tip-n">${String(i+1).padStart(2,'0')}</div>
-          <div class="tip-t">${t}</div>
-        </div>
-      `).join('')}
-      <div class="goal-box">
-        <div class="goal-box-title">YOUR 12-WEEK TARGETS</div>
-        <div class="goal-row"><span class="goal-label">Fat mass: 16.8 kg →</span><span class="goal-val">9–11 kg</span></div>
-        <div class="goal-row"><span class="goal-label">Body fat: 22.4% →</span><span class="goal-val">14–17%</span></div>
-        <div class="goal-row"><span class="goal-label">Lean mass: 58.2 kg →</span><span class="goal-val">61–64 kg</span></div>
-        <div class="goal-row"><span class="goal-label">Weight: 75 kg →</span><span class="goal-val">65–68 kg</span></div>
-        <div class="goal-row"><span class="goal-label">Pure fat to remove:</span><span class="goal-val">~6–8 kg</span></div>
-      </div>
-    </div>
-  `;
-}
-
-/* ═══════════════════════════════════════════════════════
-   INIT
-═══════════════════════════════════════════════════════ */
-document.getElementById('overlay').addEventListener('click', function(e){if(e.target===this)closeModal();});
-
-setTimeout(()=>{
-  const s=document.getElementById('splash');
-  s.style.transition='opacity .6s';s.style.opacity='0';
-  setTimeout(()=>s.remove(),600);
-},2600);
-</script>
-</body>
-</html>
+home();
+</script></body></html>
